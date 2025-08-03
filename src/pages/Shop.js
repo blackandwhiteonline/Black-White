@@ -27,6 +27,7 @@ const Shop = () => {
   
   // Intersection observer for animations
   const [productsRef, productsInView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [filtersRef, filtersInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   // Get category and search from URL params
   useEffect(() => {
@@ -121,7 +122,7 @@ const Shop = () => {
     : [];
 
   return (
-    <div className="min-h-screen bg-brand-gray-50 pt-20">
+    <div className="min-h-screen bg-brand-gray-50 pt-16 sm:pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Header */}
@@ -162,8 +163,9 @@ const Shop = () => {
           
           {/* Filters Sidebar */}
           <motion.div
+            ref={filtersRef}
             initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={filtersInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:w-80 order-2 lg:order-1"
           >
@@ -392,18 +394,19 @@ const Shop = () => {
                   </button>
                 </motion.div>
               ) : (
-                <div className={`grid gap-4 sm:gap-6 ${
+                <div className={`grid gap-3 sm:gap-4 lg:gap-6 ${
                   viewMode === 'grid' 
-                    ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+                    ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4' 
                     : 'grid-cols-1'
                 }`}>
                   <AnimatePresence>
                     {sortedProducts.map((product, index) => (
                       <motion.div
                         key={product.id}
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: index * 0.1 }}
+                        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                        animate={productsInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                        transition={{ duration: 0.5, delay: index * 0.05 }}
+                        whileHover={{ y: -5, scale: 1.02 }}
                         className="group"
                       >
                         <div className={`card-premium overflow-hidden ${
@@ -459,39 +462,39 @@ const Shop = () => {
                           </div>
 
                           {/* Product Info */}
-                          <div className={`p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+                          <div className={`p-3 sm:p-4 lg:p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
                             <Link to={`/product/${product.id}`}>
-                              <h3 className="text-lg font-semibold text-brand-black mb-2 hover:text-brand-gray-600 transition-colors duration-300 cursor-pointer">
+                              <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-brand-black mb-1 sm:mb-2 hover:text-brand-gray-600 transition-colors duration-300 cursor-pointer line-clamp-2">
                                 {product.name}
                               </h3>
                             </Link>
                             
-                            <div className="flex items-center space-x-2 mb-3">
+                            <div className="flex items-center space-x-1 sm:space-x-2 mb-2 sm:mb-3">
                               <div className="flex items-center">
                                 {[...Array(5)].map((_, i) => (
                                   <Star
                                     key={i}
-                                    size={16}
+                                    size={12}
                                     className={i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
                                   />
                                 ))}
                               </div>
-                              <span className="text-sm text-brand-gray-500">
+                              <span className="text-xs sm:text-sm text-brand-gray-500">
                                 ({product.reviews})
                               </span>
                             </div>
 
-                            <p className="text-brand-gray-600 mb-4 line-clamp-2">
+                            <p className="text-xs sm:text-sm text-brand-gray-600 mb-2 sm:mb-4 line-clamp-2 hidden sm:block">
                               {product.description}
                             </p>
 
                             <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-2">
-                                <span className="text-xl font-bold text-brand-black">
+                              <div className="flex items-center space-x-1 sm:space-x-2">
+                                <span className="text-base sm:text-lg lg:text-xl font-bold text-brand-black">
                                   ₹{product.price.toLocaleString()}
                                 </span>
                                 {product.originalPrice > product.price && (
-                                  <span className="text-sm text-brand-gray-500 line-through">
+                                  <span className="text-xs sm:text-sm text-brand-gray-500 line-through">
                                     ₹{product.originalPrice.toLocaleString()}
                                   </span>
                                 )}
@@ -499,7 +502,7 @@ const Shop = () => {
                               
                               <Link to={`/product/${product.id}`}>
                                 <button
-                                  className="text-brand-black hover:text-brand-gray-600 transition-colors duration-300 font-medium"
+                                  className="text-xs sm:text-sm text-brand-black hover:text-brand-gray-600 transition-colors duration-300 font-medium"
                                 >
                                   View Details
                                 </button>
