@@ -6,6 +6,7 @@ import { ArrowRight, Star, ShoppingBag, Heart } from 'lucide-react';
 import { products } from '../data/products';
 import { useCart } from '../context/CartContext';
 
+
 const Home = () => {
   // State management
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -242,9 +243,10 @@ const Home = () => {
             ].map((feature, index) => (
               <motion.div
                 key={feature.title}
+                whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
+                whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 50 }}
                 animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
                 className="text-center p-8 card-premium hover-lift"
               >
                 <div className="text-4xl mb-4">{feature.icon}</div>

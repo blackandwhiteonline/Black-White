@@ -45,15 +45,6 @@ const Shop = () => {
     window.scrollTo(0, 0);
   }, [searchParams]);
 
-  // Ensure products are always shown by default
-  useEffect(() => {
-    // This ensures the component re-renders with all products when it mounts
-    if (filteredProducts.length === 0 && !selectedCategory && !selectedSubcategory && !selectedColor && searchQuery === '') {
-      // Force a re-render by updating a state
-      setSearchQuery('');
-    }
-  }, []);
-
   // Filter and sort products
   const filteredProducts = products.filter(product => {
     // Search filter
@@ -168,27 +159,27 @@ const Shop = () => {
           </motion.div>
         </motion.div>
 
-        <div className="flex flex-col xl:flex-row gap-6 lg:gap-8">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
           
           {/* Filters Sidebar */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="xl:w-80 order-2 xl:order-1"
+            className="lg:w-80 order-2 lg:order-1"
           >
             <div className="card-premium p-4 sm:p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg sm:text-xl font-semibold text-brand-black">Filters</h2>
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="xl:hidden p-2 hover:bg-brand-gray-100 rounded transition-colors duration-300"
+                  className="lg:hidden p-2 hover:bg-brand-gray-100 rounded transition-colors duration-300"
                 >
                   <Filter size={20} />
                 </button>
               </div>
 
-              <div className={`xl:block ${showFilters ? 'block' : 'hidden'}`}>
+              <div className={`lg:block ${showFilters ? 'block' : 'hidden'}`}>
                 
                 {/* Category Filter */}
                 <div className="mb-6">
@@ -405,7 +396,7 @@ const Shop = () => {
                       <motion.div
                         key={product.id}
                         initial={{ opacity: 0, y: 50 }}
-                        animate={productsInView ? { opacity: 1, y: 0 } : {}}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: index * 0.1 }}
                         className="group"
                       >
