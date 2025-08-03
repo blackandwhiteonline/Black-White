@@ -30,8 +30,7 @@ const Cart = () => {
 
   // Calculate subtotal
   const subtotal = getCartTotal();
-  const shipping = subtotal > 5000 ? 0 : 299; // Free shipping above ₹5000
-  const total = subtotal + shipping;
+  const total = subtotal;
 
   return (
     <div className="min-h-screen bg-brand-gray-50 pt-16 sm:pt-20">
@@ -216,19 +215,6 @@ const Cart = () => {
                     <span className="text-brand-gray-600">Subtotal</span>
                     <span className="font-medium">₹{subtotal.toLocaleString()}</span>
                   </div>
-                  
-                  <div className="flex justify-between">
-                    <span className="text-brand-gray-600">Shipping</span>
-                    <span className="font-medium">
-                      {shipping === 0 ? 'Free' : `₹${shipping}`}
-                    </span>
-                  </div>
-                  
-                  {shipping > 0 && (
-                    <div className="text-sm text-brand-gray-500">
-                      Free shipping on orders above ₹5,000
-                    </div>
-                  )}
                   
                   <div className="border-t border-brand-gray-200 pt-4">
                     <div className="flex justify-between">

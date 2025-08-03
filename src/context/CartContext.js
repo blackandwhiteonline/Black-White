@@ -49,7 +49,7 @@ export const CartProvider = ({ children }) => {
         const updatedCart = [...cartItems];
         updatedCart[existingItemIndex].quantity += quantity;
         setCartItems(updatedCart);
-        toast.success(`Updated ${product.name} quantity in cart!`);
+        // Don't show toast for quantity updates to avoid duplicate notifications
       } else {
         // Add new item to cart
         const newItem = {

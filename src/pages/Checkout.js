@@ -28,7 +28,7 @@ const Checkout = () => {
 
   // Calculate totals
   const subtotal = getCartTotal();
-  const shipping = shippingInfo ? shippingInfo.shippingCharge : (subtotal > 5000 ? 0 : 299);
+  const shipping = shippingInfo ? shippingInfo.shippingCharge : 0;
   const total = subtotal + shipping;
 
   // Calculate shipping based on pincode
@@ -305,21 +305,21 @@ const Checkout = () => {
                   onClick={() => setShowPaymentForm(true)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-brand-black text-brand-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-brand-gray-800 transition-colors duration-300"
+                  className="w-full bg-brand-black text-brand-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-brand-gray-800 transition-colors duration-300 mb-8"
                 >
                   Place Order
                 </motion.button>
 
                 {/* Payment Methods */}
                 {showPaymentForm && (
-                  <div className="border-t border-brand-gray-200 pt-6">
-                    <h3 className="text-xl font-semibold text-brand-black mb-6">
+                  <div className="border-t border-brand-gray-200 pt-8">
+                    <h3 className="text-xl font-semibold text-brand-black mb-8">
                       Payment Information
                     </h3>
                     
-                    <div className="space-y-4 mb-6">
-                      <div className="space-y-3">
-                        <label className="flex items-center space-x-3 cursor-pointer">
+                    <div className="space-y-6 mb-8">
+                      <div className="space-y-4">
+                        <label className="flex items-center space-x-3 cursor-pointer p-3 hover:bg-brand-gray-50 rounded-lg transition-colors duration-300">
                           <input
                             type="radio"
                             name="paymentMethod"
@@ -331,7 +331,7 @@ const Checkout = () => {
                           <span className="font-medium">Credit or Debit Card</span>
                         </label>
                         
-                        <label className="flex items-center space-x-3 cursor-pointer">
+                        <label className="flex items-center space-x-3 cursor-pointer p-3 hover:bg-brand-gray-50 rounded-lg transition-colors duration-300">
                           <input
                             type="radio"
                             name="paymentMethod"
@@ -343,7 +343,7 @@ const Checkout = () => {
                           <span className="font-medium">Net Banking</span>
                         </label>
                         
-                        <label className="flex items-center space-x-3 cursor-pointer">
+                        <label className="flex items-center space-x-3 cursor-pointer p-3 hover:bg-brand-gray-50 rounded-lg transition-colors duration-300">
                           <input
                             type="radio"
                             name="paymentMethod"
@@ -355,7 +355,7 @@ const Checkout = () => {
                           <span className="font-medium">Other UPI Apps</span>
                         </label>
                         
-                        <label className="flex items-center space-x-3 cursor-pointer">
+                        <label className="flex items-center space-x-3 cursor-pointer p-3 hover:bg-brand-gray-50 rounded-lg transition-colors duration-300">
                           <input
                             type="radio"
                             name="paymentMethod"
@@ -367,7 +367,7 @@ const Checkout = () => {
                           <span className="font-medium">EMI Options</span>
                         </label>
                         
-                        <label className="flex items-center space-x-3 cursor-pointer">
+                        <label className="flex items-center space-x-3 cursor-pointer p-3 hover:bg-brand-gray-50 rounded-lg transition-colors duration-300">
                           <input
                             type="radio"
                             name="paymentMethod"
@@ -486,7 +486,7 @@ const Checkout = () => {
                       disabled={isProcessing}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full bg-brand-black text-brand-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-brand-gray-800 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-brand-black text-brand-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-brand-gray-800 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed mt-8"
                     >
                       {isProcessing ? 'Processing...' : `Pay ₹${total.toLocaleString()}`}
                     </motion.button>
@@ -499,7 +499,7 @@ const Checkout = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={isProcessing}
-                  className="w-full btn-primary py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full btn-primary py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed mt-8"
                 >
                   {isProcessing ? (
                     <div className="flex items-center justify-center">

@@ -64,7 +64,7 @@ const Navbar = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
             ? 'bg-brand-white/95 backdrop-blur-md shadow-lg' 
-            : 'bg-brand-white'
+            : 'bg-brand-white/90 backdrop-blur-sm shadow-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
@@ -87,7 +87,7 @@ const Navbar = () => {
                   key={item.name}
                   to={item.path}
                   className={`text-modern font-medium transition-all duration-300 hover:text-brand-gray-600 ${
-                    location.pathname === item.path ? 'text-brand-black' : 'text-brand-gray-700'
+                    location.pathname === item.path ? 'text-brand-black' : 'text-brand-gray-800'
                   }`}
                 >
                   {item.name}
@@ -95,7 +95,7 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Desktop Actions */}
+                          {/* Desktop Actions */}
             <div className="hidden lg:flex items-center space-x-6">
               
               {/* Search Button */}
@@ -103,7 +103,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="p-2 text-brand-gray-700 hover:text-brand-black transition-colors duration-300"
+                className="p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
               >
                 <Search size={20} />
               </motion.button>
@@ -113,7 +113,7 @@ const Navbar = () => {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative p-2 text-brand-gray-700 hover:text-brand-black transition-colors duration-300"
+                  className="relative p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
                 >
                   <Heart size={20} />
                   {getWishlistCount() > 0 && (
@@ -133,7 +133,7 @@ const Navbar = () => {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative p-2 text-brand-gray-700 hover:text-brand-black transition-colors duration-300"
+                  className="relative p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
                 >
                   <ShoppingBag size={20} />
                   {getCartItemCount() > 0 && (
@@ -154,7 +154,7 @@ const Navbar = () => {
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 p-2 text-brand-gray-700 hover:text-brand-black transition-colors duration-300"
+                    className="flex items-center space-x-2 p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
                   >
                     <img 
                       src={user.avatar} 
@@ -182,7 +182,7 @@ const Navbar = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-2 p-2 text-brand-gray-700 hover:text-brand-black transition-colors duration-300"
+                    className="flex items-center space-x-2 p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
                   >
                     <User size={20} />
                     <span className="text-sm font-medium">Login</span>
@@ -196,7 +196,7 @@ const Navbar = () => {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-brand-gray-700 hover:text-brand-black transition-colors duration-300"
+                className="p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </motion.button>

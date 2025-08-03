@@ -89,7 +89,6 @@ const Shop = () => {
   // Handle add to cart
   const handleAddToCart = (product) => {
     addToCart(product, 1, 'M', product.colors[0]);
-    toast.success(`${product.name} added to cart!`);
   };
 
   // Handle wishlist toggle
@@ -185,7 +184,8 @@ const Shop = () => {
                 <div className="mb-6">
                   <h3 className="text-lg font-medium text-brand-black mb-3">Category</h3>
                   <div className="space-y-2">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
                       onClick={() => setSelectedCategory('')}
                       className={`w-full text-left px-3 py-2 rounded transition-colors duration-300 ${
                         selectedCategory === '' 
@@ -194,10 +194,11 @@ const Shop = () => {
                       }`}
                     >
                       All Categories
-                    </button>
+                    </motion.button>
                     {Object.entries(categories).map(([key, category]) => (
-                      <button
+                      <motion.button
                         key={key}
+                        whileHover={{ scale: 1.02 }}
                         onClick={() => setSelectedCategory(key)}
                         className={`w-full text-left px-3 py-2 rounded transition-colors duration-300 ${
                           selectedCategory === key 
@@ -206,7 +207,7 @@ const Shop = () => {
                         }`}
                       >
                         {category.name}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </div>
@@ -216,7 +217,8 @@ const Shop = () => {
                   <div className="mb-6">
                     <h3 className="text-lg font-medium text-brand-black mb-3">Type</h3>
                     <div className="space-y-2">
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
                         onClick={() => setSelectedSubcategory('')}
                         className={`w-full text-left px-3 py-2 rounded transition-colors duration-300 ${
                           selectedSubcategory === '' 
@@ -225,10 +227,11 @@ const Shop = () => {
                         }`}
                       >
                         All Types
-                      </button>
+                      </motion.button>
                       {availableSubcategories.map((subcategory) => (
-                        <button
+                        <motion.button
                           key={subcategory}
+                          whileHover={{ scale: 1.02 }}
                           onClick={() => setSelectedSubcategory(subcategory)}
                           className={`w-full text-left px-3 py-2 rounded transition-colors duration-300 ${
                             selectedSubcategory === subcategory 
@@ -237,7 +240,7 @@ const Shop = () => {
                           }`}
                         >
                           {subcategory.charAt(0).toUpperCase() + subcategory.slice(1).replace('-', ' ')}
-                        </button>
+                        </motion.button>
                       ))}
                     </div>
                   </div>
@@ -247,7 +250,8 @@ const Shop = () => {
                 <div className="mb-6">
                   <h3 className="text-lg font-medium text-brand-black mb-3">Color</h3>
                   <div className="space-y-2">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
                       onClick={() => setSelectedColor('')}
                       className={`w-full text-left px-3 py-2 rounded transition-colors duration-300 ${
                         selectedColor === '' 
@@ -256,10 +260,11 @@ const Shop = () => {
                       }`}
                     >
                       All Colors
-                    </button>
+                    </motion.button>
                     {availableColors.map((color) => (
-                      <button
+                      <motion.button
                         key={color}
+                        whileHover={{ scale: 1.02 }}
                         onClick={() => setSelectedColor(color)}
                         className={`w-full text-left px-3 py-2 rounded transition-colors duration-300 ${
                           selectedColor === color 
@@ -268,7 +273,7 @@ const Shop = () => {
                         }`}
                       >
                         {color}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </div>
@@ -294,12 +299,13 @@ const Shop = () => {
                 </div>
 
                 {/* Clear Filters */}
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
                   onClick={clearFilters}
                   className="w-full btn-secondary"
                 >
                   Clear All Filters
-                </button>
+                </motion.button>
               </div>
             </div>
           </motion.div>
@@ -412,7 +418,7 @@ const Shop = () => {
                               <img
                                 src={product.images[0]}
                                 alt={product.name}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
+                                className="w-full h-full object-cover cursor-pointer"
                               />
                             </Link>
                             
