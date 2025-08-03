@@ -96,12 +96,32 @@ const Account = () => {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <h1 className="text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-4">
-            My Account
-          </h1>
-          <p className="text-xl text-brand-gray-600">
-            Welcome back, {user.name}
-          </p>
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-6">
+            <div className="relative">
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face" 
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="absolute -bottom-2 -right-2 bg-brand-black text-brand-white p-2 rounded-full shadow-lg"
+              >
+                <User size={16} />
+              </motion.button>
+            </div>
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-4">
+                My Account
+              </h1>
+              <p className="text-xl text-brand-gray-600">
+                Welcome back, {user.name}
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">

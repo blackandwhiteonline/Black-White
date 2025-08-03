@@ -92,13 +92,26 @@ const Contact = () => {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl lg:text-6xl font-premium font-bold text-brand-black mb-6">
-              Get in Touch
-            </h1>
-            <p className="text-xl text-brand-gray-600 max-w-3xl mx-auto">
-              Have questions about our products or need assistance? We're here to help. 
-              Reach out to us and we'll get back to you as soon as possible.
-            </p>
+            <div className="relative mb-8">
+              <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=400&fit=crop" 
+                  alt="Contact Us"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <div className="text-center text-brand-white">
+                    <h1 className="text-4xl lg:text-6xl font-premium font-bold mb-6">
+                      Get in Touch
+                    </h1>
+                    <p className="text-xl text-brand-gray-200 max-w-3xl mx-auto">
+                      Have questions about our products or need assistance? We're here to help. 
+                      Reach out to us and we'll get back to you as soon as possible.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </section>
 

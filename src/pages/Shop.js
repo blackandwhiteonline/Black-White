@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Filter, Grid, List, Star, ShoppingBag, Heart, ChevronDown, Search } from 'lucide-react';
+import { Filter, Grid, List, Star, ShoppingBag, Heart, ChevronDown, Search, X } from 'lucide-react';
 import { products, categories, getProductsByCategory } from '../data/products';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -121,20 +121,20 @@ const Shop = () => {
     : [];
 
   return (
-    <div className="min-h-screen bg-brand-gray-50 pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-brand-gray-50 pt-16 sm:pt-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-4 sm:mb-6 md:mb-8"
         >
-          <h1 className="text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-2 sm:mb-4">
             Shop Collection
           </h1>
-          <p className="text-xl text-brand-gray-600 mb-6">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600 mb-4 sm:mb-6">
             Discover our premium black and white clothing collection
           </p>
           
@@ -158,7 +158,123 @@ const Shop = () => {
           </motion.div>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        {/* Mobile Category Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="lg:hidden mb-6"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-brand-black">Categories</h3>
+            {selectedCategory && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedCategory('')}
+                className="text-sm text-brand-gray-600 hover:text-brand-black transition-colors duration-300"
+              >
+                Clear Filter
+              </motion.button>
+            )}
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {/* All Categories Card */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedCategory('')}
+              className={`relative overflow-hidden rounded-lg aspect-square group shadow-sm ${
+                selectedCategory === '' 
+                  ? 'ring-2 ring-brand-black shadow-md' 
+                  : 'hover:ring-2 hover:ring-brand-gray-300 hover:shadow-md'
+              }`}
+            >
+              {/* All Categories Image */}
+              <div className="absolute inset-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=400&fit=crop" 
+                  alt="All Categories"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"></div>
+              </div>
+              
+              {/* Text Content */}
+              <div className="relative z-10 flex flex-col justify-center items-center h-full p-3 text-brand-white text-center">
+                <div className="flex items-center justify-center mb-1">
+                  <h4 className="font-semibold text-sm">All Categories</h4>
+                  {selectedCategory === '' && (
+                    <div className="w-2 h-2 bg-brand-white rounded-full ml-2"></div>
+                  )}
+                </div>
+                <p className="text-xs text-brand-gray-200">View all products</p>
+              </div>
+            </motion.button>
+
+            {/* Category Cards */}
+            {Object.entries(categories).map(([key, category]) => (
+              <motion.button
+                key={key}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setSelectedCategory(key)}
+                className={`relative overflow-hidden rounded-lg aspect-square group shadow-sm ${
+                  selectedCategory === key 
+                    ? 'ring-2 ring-brand-black shadow-md' 
+                    : 'hover:ring-2 hover:ring-brand-gray-300 hover:shadow-md'
+                }`}
+              >
+                {/* Category Image */}
+                <div className="absolute inset-0">
+                  <img 
+                    src={category.image} 
+                    alt={category.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors duration-300"></div>
+                </div>
+                
+                {/* Text Content */}
+                <div className="relative z-10 flex flex-col justify-end h-full p-3 text-brand-white">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-semibold text-sm">{category.name}</h4>
+                    {selectedCategory === key && (
+                      <div className="w-2 h-2 bg-brand-white rounded-full"></div>
+                    )}
+                  </div>
+                  <p className="text-xs text-brand-gray-200">{category.description}</p>
+                </div>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Selected Category Indicator - Mobile */}
+        {selectedCategory && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="lg:hidden mb-4"
+          >
+            <div className="bg-brand-black text-brand-white px-4 py-2 rounded-lg flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium">Showing:</span>
+                <span className="text-sm">{categories[selectedCategory]?.name}</span>
+              </div>
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedCategory('')}
+                className="text-brand-white hover:text-brand-gray-200 transition-colors duration-300"
+              >
+                <X size={16} />
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           
           {/* Filters Sidebar */}
           <motion.div
@@ -167,9 +283,9 @@ const Shop = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:w-80 order-2 lg:order-1"
           >
-            <div className="card-premium p-4 sm:p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg sm:text-xl font-semibold text-brand-black">Filters</h2>
+            <div className="card-premium p-3 sm:p-4 md:p-6">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <h2 className="text-base sm:text-lg md:text-xl font-semibold text-brand-black">Filters</h2>
                 <button
                   onClick={() => setShowFilters(!showFilters)}
                   className="lg:hidden p-2 hover:bg-brand-gray-100 rounded transition-colors duration-300"
@@ -392,9 +508,9 @@ const Shop = () => {
                   </button>
                 </motion.div>
               ) : (
-                <div className={`grid gap-4 sm:gap-6 ${
+                <div className={`grid gap-3 sm:gap-4 md:gap-6 ${
                   viewMode === 'grid' 
-                    ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+                    ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4' 
                     : 'grid-cols-1'
                 }`}>
                   <AnimatePresence>
@@ -459,39 +575,39 @@ const Shop = () => {
                           </div>
 
                           {/* Product Info */}
-                          <div className={`p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
+                          <div className={`p-3 sm:p-4 md:p-6 ${viewMode === 'list' ? 'flex-1' : ''}`}>
                             <Link to={`/product/${product.id}`}>
-                              <h3 className="text-lg font-semibold text-brand-black mb-2 hover:text-brand-gray-600 transition-colors duration-300 cursor-pointer">
+                              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-brand-black mb-1 sm:mb-2 hover:text-brand-gray-600 transition-colors duration-300 cursor-pointer">
                                 {product.name}
                               </h3>
                             </Link>
                             
-                            <div className="flex items-center space-x-2 mb-3">
+                            <div className="flex items-center space-x-1 sm:space-x-2 mb-2 sm:mb-3">
                               <div className="flex items-center">
                                 {[...Array(5)].map((_, i) => (
                                   <Star
                                     key={i}
-                                    size={16}
-                                    className={i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                                    size={12}
+                                    className={`${i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'} sm:w-4 sm:h-4`}
                                   />
                                 ))}
                               </div>
-                              <span className="text-sm text-brand-gray-500">
+                              <span className="text-xs sm:text-sm text-brand-gray-500">
                                 ({product.reviews})
                               </span>
                             </div>
 
-                            <p className="text-brand-gray-600 mb-4 line-clamp-2">
+                            <p className="text-xs sm:text-sm md:text-base text-brand-gray-600 mb-3 sm:mb-4 line-clamp-2">
                               {product.description}
                             </p>
 
                             <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-2">
-                                <span className="text-xl font-bold text-brand-black">
+                              <div className="flex items-center space-x-1 sm:space-x-2">
+                                <span className="text-base sm:text-lg md:text-xl font-bold text-brand-black">
                                   ₹{product.price.toLocaleString()}
                                 </span>
                                 {product.originalPrice > product.price && (
-                                  <span className="text-sm text-brand-gray-500 line-through">
+                                  <span className="text-xs sm:text-sm text-brand-gray-500 line-through">
                                     ₹{product.originalPrice.toLocaleString()}
                                   </span>
                                 )}

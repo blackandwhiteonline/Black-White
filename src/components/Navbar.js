@@ -68,17 +68,30 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-          <div className="flex justify-between items-center h-14 sm:h-16 lg:h-20">
+          <div className="flex justify-between items-center h-12 sm:h-14 md:h-16 lg:h-20">
             
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-xl sm:text-2xl lg:text-3xl font-premium font-bold text-brand-black"
+            {/* Mobile Menu Button - Left Side */}
+            <div className="lg:hidden">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
               >
-                Black&White
-              </motion.div>
-            </Link>
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.button>
+            </div>
+
+            {/* Logo - Centered on Mobile, Left on Desktop */}
+            <div className="flex-1 lg:flex-none flex justify-center lg:justify-start">
+              <Link to="/" className="flex items-center space-x-2">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-premium font-bold text-brand-black"
+                >
+                  Black&White
+                </motion.div>
+              </Link>
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
@@ -191,15 +204,37 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="lg:hidden">
+            {/* Mobile Actions - Right Side */}
+            <div className="lg:hidden flex items-center space-x-2">
+              {/* Search Button */}
               <motion.button
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
                 className="p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                <Search size={20} />
               </motion.button>
+
+              {/* Cart */}
+              <Link to="/cart">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
+                >
+                  <ShoppingBag size={20} />
+                  {getCartItemCount() > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -top-1 -right-1 bg-brand-black text-brand-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                    >
+                      {getCartItemCount()}
+                    </motion.span>
+                  )}
+                </motion.button>
+              </Link>
             </div>
           </div>
         </div>
@@ -237,10 +272,10 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
+            initial={{ opacity: 0, x: '-100%' }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            className="fixed top-16 lg:hidden right-0 w-64 h-full bg-brand-white shadow-xl z-40"
+            exit={{ opacity: 0, x: '-100%' }}
+            className="fixed top-16 lg:hidden left-0 w-64 h-full bg-brand-white shadow-xl z-40"
           >
             <div className="p-6 space-y-6">
               {/* Mobile Navigation */}

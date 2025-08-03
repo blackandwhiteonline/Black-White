@@ -1495,6 +1495,8 @@ export const products = [
 export const categories = {
   'mens-topwear': {
     name: 'Men\'s Topwear',
+    description: 'Premium shirts, t-shirts & more',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
     subcategories: {
       't-shirts': 'T-Shirts',
       'casual-shirts': 'Casual Shirts',
@@ -1509,6 +1511,8 @@ export const categories = {
   },
   'mens-indian-festive': {
     name: 'Men\'s Indian & Festive Wear',
+    description: 'Traditional & festive collection',
+    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop',
     subcategories: {
       'kurtas-kurta-sets': 'Kurtas & Kurta Sets',
       'sherwanis': 'Sherwanis',
@@ -1518,6 +1522,8 @@ export const categories = {
   },
   'mens-bottomwear': {
     name: 'Men\'s Bottomwear',
+    description: 'Jeans, trousers & more',
+    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop',
     subcategories: {
       'jeans': 'Jeans',
       'casual-trousers': 'Casual Trousers',
@@ -1528,6 +1534,8 @@ export const categories = {
   },
   'womens-topwear': {
     name: 'Women\'s Topwear',
+    description: 'Elegant tops & shirts',
+    image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=400&fit=crop',
     subcategories: {
       't-shirts': 'T-Shirts',
       'casual-shirts': 'Casual Shirts',
@@ -1542,6 +1550,8 @@ export const categories = {
   },
   'womens-indian-festive': {
     name: 'Women\'s Indian & Festive Wear',
+    description: 'Traditional & ethnic wear',
+    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop',
     subcategories: {
       'kurtas-kurta-sets': 'Kurtas & Kurta Sets',
       'sarees': 'Sarees',
@@ -1551,6 +1561,8 @@ export const categories = {
   },
   'womens-bottomwear': {
     name: 'Women\'s Bottomwear',
+    description: 'Stylish bottoms & jeans',
+    image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&h=400&fit=crop',
     subcategories: {
       'jeans': 'Jeans',
       'casual-trousers': 'Casual Trousers',

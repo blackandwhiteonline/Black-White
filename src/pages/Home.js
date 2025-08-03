@@ -34,6 +34,7 @@ const Home = () => {
       type: "video",
       video: "https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69a27dbc4ff2b87d38afc35f1a9e7c02d&profile_id=139&oauth2_token_id=57447761",
       image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=800&fit=crop",
+      mobileImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=1000&fit=crop",
       cta: "Shop Now",
       link: "/shop"
     },
@@ -42,6 +43,7 @@ const Home = () => {
       subtitle: "Traditional wear reimagined",
       description: "Celebrate culture with modern elegance",
       image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1200&h=800&fit=crop",
+      mobileImage: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=1000&fit=crop",
       cta: "Explore Traditional",
       link: "/shop?category=mens-traditional"
     },
@@ -50,6 +52,7 @@ const Home = () => {
       subtitle: "Western wear with Indian sensibility",
       description: "Where comfort meets sophistication",
       image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&h=800&fit=crop",
+      mobileImage: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=1000&fit=crop",
       cta: "View Collection",
       link: "/shop?category=mens-western"
     }
@@ -87,7 +90,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-screen sm:h-screen overflow-hidden">
+      <section ref={heroRef} className="relative h-[80vh] sm:h-screen overflow-hidden">
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
           className="absolute inset-0"
@@ -100,7 +103,7 @@ const Home = () => {
                 muted
                 loop
                 className="w-full h-full object-cover"
-                poster={heroSlides[currentSlide].image}
+                poster={heroSlides[currentSlide].mobileImage}
               >
                 <source src={heroSlides[currentSlide].video} type="video/mp4" />
                 Your browser does not support the video tag.
@@ -108,11 +111,21 @@ const Home = () => {
               <div className="absolute inset-0 bg-black/40"></div>
             </div>
           ) : (
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${heroSlides[currentSlide].image})` }}
-            >
-              <div className="absolute inset-0 bg-black/40"></div>
+            <div className="absolute inset-0">
+              {/* Desktop Image */}
+              <div 
+                className="hidden md:block absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${heroSlides[currentSlide].image})` }}
+              >
+                <div className="absolute inset-0 bg-black/40"></div>
+              </div>
+              {/* Mobile Image */}
+              <div 
+                className="md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${heroSlides[currentSlide].mobileImage})` }}
+              >
+                <div className="absolute inset-0 bg-black/40"></div>
+              </div>
             </div>
           )}
         </motion.div>
@@ -124,12 +137,12 @@ const Home = () => {
           transition={{ duration: 0.8 }}
           className="relative z-10 flex items-center justify-center h-full text-center text-brand-white"
         >
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl lg:text-7xl font-premium font-bold mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-premium font-bold mb-2 sm:mb-4"
             >
               {heroSlides[currentSlide].title}
             </motion.h1>
@@ -138,7 +151,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl lg:text-2xl font-modern mb-6"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl font-modern mb-3 sm:mb-6"
             >
               {heroSlides[currentSlide].subtitle}
             </motion.p>
@@ -147,7 +160,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-lg text-brand-gray-200 mb-8 max-w-2xl mx-auto"
+              className="text-sm sm:text-base md:text-lg text-brand-gray-200 mb-4 sm:mb-8 max-w-2xl mx-auto"
             >
               {heroSlides[currentSlide].description}
             </motion.p>
@@ -161,7 +174,7 @@ const Home = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn-primary text-lg px-8 py-4"
+                  className="btn-primary text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4"
                 >
                   {heroSlides[currentSlide].cta}
                   <ArrowRight className="ml-2 inline" size={20} />
@@ -207,38 +220,41 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section ref={featuresRef} className="py-20 bg-brand-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={featuresRef} className="py-12 sm:py-16 md:py-20 bg-brand-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={featuresInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-3 sm:mb-6">
               Why Choose Black&White?
             </h2>
-            <p className="text-xl text-brand-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600 max-w-3xl mx-auto">
               Premium quality, timeless design, and exceptional craftsmanship in every piece.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {[
               {
                 title: "Premium Quality",
                 description: "Handcrafted with the finest materials and attention to detail",
-                icon: "✨"
+                icon: "✨",
+                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop"
               },
               {
                 title: "Timeless Design",
                 description: "Classic black and white pieces that never go out of style",
-                icon: "🎨"
+                icon: "🎨",
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop"
               },
               {
                 title: "Indian Heritage",
                 description: "Celebrating traditional craftsmanship with modern sensibilities",
-                icon: "🇮🇳"
+                icon: "🇮🇳",
+                image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop"
               }
             ].map((feature, index) => (
               <motion.div
@@ -247,13 +263,21 @@ const Home = () => {
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 50 }}
                 animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-                className="text-center p-8 card-premium hover-lift"
+                className="text-center p-4 sm:p-6 md:p-8 card-premium hover-lift overflow-hidden"
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-brand-black mb-4">
+                <div className="relative mb-4">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    className="w-full h-32 object-cover rounded-lg"
+                  />
+                  <div className="absolute inset-0 bg-black/20 rounded-lg"></div>
+                </div>
+                <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4">{feature.icon}</div>
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-brand-black mb-2 sm:mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-brand-gray-600">
+                <p className="text-xs sm:text-sm md:text-base text-brand-gray-600">
                   {feature.description}
                 </p>
               </motion.div>
@@ -263,24 +287,24 @@ const Home = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-brand-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 md:py-20 bg-brand-gray-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-3 sm:mb-6">
               Explore Our Collections
             </h2>
-            <p className="text-xl text-brand-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600 max-w-3xl mx-auto">
               From traditional Indian wear to contemporary western styles, discover your perfect look.
             </p>
           </motion.div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
               {[
                 {
                   key: 'mens-topwear',
@@ -342,12 +366,12 @@ const Home = () => {
                       </div>
                       
                       {/* Content */}
-                      <div className="relative z-10 flex flex-col justify-end h-full p-6 text-brand-white">
+                      <div className="relative z-10 flex flex-col justify-end h-full p-3 sm:p-4 md:p-6 text-brand-white">
                         <div className="text-center">
-                          <h3 className="text-2xl font-premium font-bold mb-2">
+                          <h3 className="text-lg sm:text-xl md:text-2xl font-premium font-bold mb-1 sm:mb-2">
                             {category.name}
                           </h3>
-                          <p className="text-brand-gray-200 mb-4 text-sm">
+                          <p className="text-brand-gray-200 mb-2 sm:mb-4 text-xs sm:text-sm">
                             {category.description}
                           </p>
                           <motion.div
@@ -369,23 +393,23 @@ const Home = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section ref={productsRef} className="py-20 bg-brand-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={productsRef} className="py-12 sm:py-16 md:py-20 bg-brand-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={productsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-3 sm:mb-6">
               Featured Products
             </h2>
-            <p className="text-xl text-brand-gray-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600 max-w-3xl mx-auto">
               Discover our most popular pieces, crafted with premium materials and timeless design.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
             {featuredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -442,33 +466,33 @@ const Home = () => {
                     </div>
 
                     {/* Product Info */}
-                    <div className="p-6">
-                      <h3 className="text-lg font-semibold text-brand-black mb-2">
+                    <div className="p-3 sm:p-4 md:p-6">
+                      <h3 className="text-sm sm:text-base md:text-lg font-semibold text-brand-black mb-1 sm:mb-2">
                         {product.name}
                       </h3>
                       
-                      <div className="flex items-center space-x-2 mb-3">
+                      <div className="flex items-center space-x-1 sm:space-x-2 mb-2 sm:mb-3">
                         <div className="flex items-center">
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
-                              size={16}
-                              className={i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                              size={12}
+                              className={`${i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'} sm:w-4 sm:h-4`}
                             />
                           ))}
                         </div>
-                        <span className="text-sm text-brand-gray-500">
+                        <span className="text-xs sm:text-sm text-brand-gray-500">
                           ({product.reviews})
                         </span>
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-xl font-bold text-brand-black">
+                        <div className="flex items-center space-x-1 sm:space-x-2">
+                          <span className="text-base sm:text-lg md:text-xl font-bold text-brand-black">
                             ₹{product.price.toLocaleString()}
                           </span>
                           {product.originalPrice > product.price && (
-                            <span className="text-sm text-brand-gray-500 line-through">
+                            <span className="text-xs sm:text-sm text-brand-gray-500 line-through">
                               ₹{product.originalPrice.toLocaleString()}
                             </span>
                           )}

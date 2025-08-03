@@ -33,22 +33,22 @@ const Cart = () => {
   const total = subtotal;
 
   return (
-    <div className="min-h-screen bg-brand-gray-50 pt-16 sm:pt-20">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-8">
+    <div className="min-h-screen bg-brand-gray-50 pt-12 sm:pt-16 md:pt-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4 md:py-8">
         
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-4 sm:mb-6 md:mb-8"
         >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-2">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-1 sm:mb-2">
                 Shopping Cart
               </h1>
-              <p className="text-lg sm:text-xl text-brand-gray-600">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600">
                 {cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart
               </p>
             </div>
@@ -93,7 +93,7 @@ const Cart = () => {
             </Link>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             
             {/* Cart Items */}
             <div className="lg:col-span-2">
