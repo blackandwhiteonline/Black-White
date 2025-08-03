@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles for Black&White theme */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFFFFF;
+    color: #000000;
+  }
+  
+  /* Custom scrollbar for premium feel */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+  }
+}
+
+@layer components {
+  /* Premium button styles */
+  .btn-primary {
+    @apply bg-brand-black text-brand-white px-6 py-3 rounded-none font-medium 
+           transition-all duration-300 hover:bg-brand-gray-800 hover:scale-105 
+           focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent text-brand-black border-2 border-brand-black px-6 py-3 
+           rounded-none font-medium transition-all duration-300 
+           hover:bg-brand-black hover:text-brand-white hover:scale-105;
+  }
+  
+  /* Premium card styles */
+  .card-premium {
+    @apply bg-brand-white border border-brand-gray-200 shadow-lg 
+           transition-all duration-300 hover:shadow-xl hover:scale-105;
+  }
+  
+  /* Premium input styles */
+  .input-premium {
+    @apply w-full px-4 py-3 border border-brand-gray-300 focus:border-brand-black 
+           focus:outline-none transition-all duration-300 bg-brand-white;
+  }
+  
+  /* Premium text styles */
+  .text-premium {
+    @apply font-premium text-brand-black;
+  }
+  
+  .text-modern {
+    @apply font-modern text-brand-black;
+  }
+  
+  /* Animation classes */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-10 transition-all duration-700;
+  }
+  
+  .animate-on-scroll.animate {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Enhanced scroll animations */
+  .animate-fade-in-up {
+    @apply opacity-0 translate-y-20 transition-all duration-1000 ease-out;
+  }
+  
+  .animate-fade-in-up.animate {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .animate-fade-in-left {
+    @apply opacity-0 -translate-x-20 transition-all duration-1000 ease-out;
+  }
+  
+  .animate-fade-in-left.animate {
+    @apply opacity-100 translate-x-0;
+  }
+  
+  .animate-fade-in-right {
+    @apply opacity-0 translate-x-20 transition-all duration-1000 ease-out;
+  }
+  
+  .animate-fade-in-right.animate {
+    @apply opacity-100 translate-x-0;
+  }
+  
+  .animate-scale-in {
+    @apply opacity-0 scale-95 transition-all duration-800 ease-out;
+  }
+  
+  .animate-scale-in.animate {
+    @apply opacity-100 scale-100;
+  }
+  
+  /* Stagger animations for lists */
+  .animate-stagger > * {
+    @apply opacity-0 translate-y-10 transition-all duration-600 ease-out;
+  }
+  
+  .animate-stagger.animate > * {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .animate-stagger.animate > *:nth-child(1) { transition-delay: 0.1s; }
+  .animate-stagger.animate > *:nth-child(2) { transition-delay: 0.2s; }
+  .animate-stagger.animate > *:nth-child(3) { transition-delay: 0.3s; }
+  .animate-stagger.animate > *:nth-child(4) { transition-delay: 0.4s; }
+  .animate-stagger.animate > *:nth-child(5) { transition-delay: 0.5s; }
+  .animate-stagger.animate > *:nth-child(6) { transition-delay: 0.6s; }
+  
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-2;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-brand-black/20;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .hover-rotate {
+    @apply transition-transform duration-300 hover:rotate-3;
+  }
+}
+
+@layer utilities {
+  /* Custom utilities for Black&White theme */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-black to-brand-gray-600 bg-clip-text text-transparent;
+  }
+  
+  .bg-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(0,0,0,0.1) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+} 
