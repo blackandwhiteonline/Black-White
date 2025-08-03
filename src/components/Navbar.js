@@ -68,13 +68,13 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-          <div className="flex justify-between items-center h-12 sm:h-14 lg:h-20">
+          <div className="flex justify-between items-center h-14 sm:h-16 lg:h-20">
             
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="text-lg sm:text-xl lg:text-3xl font-premium font-bold text-brand-black"
+                className="text-xl sm:text-2xl lg:text-3xl font-premium font-bold text-brand-black"
               >
                 Black&White
               </motion.div>
@@ -198,7 +198,7 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
               >
-                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </motion.button>
             </div>
           </div>
@@ -240,7 +240,7 @@ const Navbar = () => {
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
-            className="fixed top-12 sm:top-14 lg:hidden right-0 w-64 h-full bg-brand-white shadow-xl z-40"
+            className="fixed top-16 lg:hidden right-0 w-64 h-full bg-brand-white shadow-xl z-40"
           >
             <div className="p-6 space-y-6">
               {/* Mobile Navigation */}

@@ -1,7 +1,7 @@
 {
   "name": "black-white-clothing",
   "version": "1.0.0",
-  "homepage": "https://blackandwhiteonline.github.io/Black-White",
+  "homepage": "https://blackandwhiteonline.github.io/Black-White/",
   "private": true,
   "dependencies": {
     "@stripe/stripe-js": "^1.54.0",
