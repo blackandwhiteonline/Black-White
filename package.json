@@ -22,8 +22,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "powershell -ExecutionPolicy Bypass -File \"node_modules\\.bin\\react-scripts.ps1\" start",
-    "build": "powershell -ExecutionPolicy Bypass -File \"node_modules\\.bin\\react-scripts.ps1\" build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
