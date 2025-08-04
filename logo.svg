@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="#000000"/>
+  
+  <!-- B letter -->
+  <path d="M8 8h5c2 0 3.5 1.5 3.5 3.5S15 15 13 15h-1.5l3.5 9H8V8z" fill="#FFFFFF"/>
+  <path d="M11 11h2c0.8 0 1.5 0.7 1.5 1.5S13.8 14 13 14h-2V11z" fill="#000000"/>
+  
+  <!-- W letter -->
+  <path d="M17 8h1.5l2.5 8 2.5-8H25v16h-1.5V12l-2.5 8-2.5-8v12H17V8z" fill="#FFFFFF"/>
+</svg> 
