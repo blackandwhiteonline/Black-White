@@ -152,15 +152,22 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="aspect-square bg-gradient-to-br from-brand-gray-100 to-brand-gray-200 rounded-lg flex items-center justify-center">
-                <div className="text-center text-brand-black p-8">
-                  <h3 className="text-2xl font-premium font-bold mb-4">
-                    Our Story
-                  </h3>
-                  <p className="text-brand-gray-700">
-                    Founded in 2024, Black&White began with a simple vision: to create clothing that celebrates 
-                    the timeless elegance of black and white fashion.
-                  </p>
+              <div className="aspect-square rounded-lg overflow-hidden shadow-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop" 
+                  alt="Our Story"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <div className="text-center text-brand-white p-8">
+                    <h3 className="text-2xl font-premium font-bold mb-4">
+                      Our Story
+                    </h3>
+                    <p className="text-brand-gray-200">
+                      Founded in 2024, Black&White began with a simple vision: to create clothing that celebrates 
+                      the timeless elegance of black and white fashion.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

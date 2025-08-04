@@ -154,8 +154,10 @@ const Account = () => {
                   { id: 'wishlist', label: 'Wishlist', icon: Heart },
                   { id: 'settings', label: 'Settings', icon: Settings }
                 ].map((tab) => (
-                  <button
+                  <motion.button
                     key={tab.id}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center space-x-3 px-4 py-3 rounded transition-colors duration-300 ${
                       activeTab === tab.id
@@ -165,16 +167,18 @@ const Account = () => {
                   >
                     <tab.icon size={20} />
                     <span>{tab.label}</span>
-                  </button>
+                  </motion.button>
                 ))}
                 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={logout}
                   className="w-full flex items-center space-x-3 px-4 py-3 rounded text-red-600 hover:bg-red-50 transition-colors duration-300"
                 >
                   <LogOut size={20} />
                   <span>Logout</span>
-                </button>
+                </motion.button>
               </nav>
             </div>
           </motion.div>
@@ -301,7 +305,11 @@ const Account = () => {
                   
                   <div className="space-y-6">
                     {orderHistory.map((order) => (
-                      <div key={order.id} className="border border-brand-gray-200 rounded-lg p-6">
+                      <Link key={order.id} to={`/order/${order.id}`}>
+                        <motion.div 
+                          whileHover={{ scale: 1.02 }}
+                          className="border border-brand-gray-200 rounded-lg p-6 cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                        >
                         <div className="flex items-center justify-between mb-4">
                           <div>
                             <h3 className="font-semibold text-brand-black">{order.id}</h3>
@@ -323,7 +331,8 @@ const Account = () => {
                             </div>
                           ))}
                         </div>
-                      </div>
+                        </motion.div>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -410,7 +419,10 @@ const Account = () => {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Default Address */}
-                    <div className="p-6 border-2 border-brand-black rounded-lg relative">
+                    <motion.div 
+                      whileHover={{ scale: 1.02 }}
+                      className="p-6 border-2 border-brand-black rounded-lg relative hover:shadow-lg transition-shadow duration-300"
+                    >
                       <div className="absolute top-4 right-4">
                         <span className="bg-brand-black text-brand-white px-2 py-1 text-xs rounded">Default</span>
                       </div>
@@ -437,10 +449,13 @@ const Account = () => {
                           Remove
                         </motion.button>
                       </div>
-                    </div>
+                    </motion.div>
 
                     {/* Office Address */}
-                    <div className="p-6 border border-brand-gray-200 rounded-lg">
+                    <motion.div 
+                      whileHover={{ scale: 1.02 }}
+                      className="p-6 border border-brand-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300"
+                    >
                       <h3 className="font-semibold text-brand-black mb-2">Office Address</h3>
                       <p className="text-brand-gray-600 mb-4">
                         456 Business Park<br />
@@ -464,7 +479,7 @@ const Account = () => {
                           Remove
                         </motion.button>
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               )}

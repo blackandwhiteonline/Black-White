@@ -216,6 +216,26 @@ const Navbar = () => {
                 <Search size={20} />
               </motion.button>
 
+              {/* Wishlist */}
+              <Link to="/wishlist">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="relative p-2 text-brand-gray-800 hover:text-brand-black transition-colors duration-300"
+                >
+                  <Heart size={20} />
+                  {getWishlistCount() > 0 && (
+                    <motion.span
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -top-1 -right-1 bg-red-500 text-brand-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                    >
+                      {getWishlistCount()}
+                    </motion.span>
+                  )}
+                </motion.button>
+              </Link>
+
               {/* Cart */}
               <Link to="/cart">
                 <motion.button

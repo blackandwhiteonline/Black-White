@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 // Import all page components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import ProductDetail from './pages/ProductDetail';
@@ -16,6 +17,7 @@ import Account from './pages/Account';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Wishlist from './pages/Wishlist';
+import OrderDetails from './pages/OrderDetails';
 
 // Import context providers
 import { AuthProvider } from './context/AuthContext';
@@ -28,6 +30,7 @@ function App() {
       <CartProvider>
         <WishlistProvider>
           <Router>
+            <ScrollToTop />
             <div className="App min-h-screen flex flex-col">
               {/* Navigation */}
               <Navbar />
@@ -40,6 +43,7 @@ function App() {
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/wishlist" element={<Wishlist />} />
+                  <Route path="/order/:orderId" element={<OrderDetails />} />
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />

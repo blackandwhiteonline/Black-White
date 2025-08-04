@@ -127,19 +127,21 @@ const Cart = () => {
                         className="flex items-center space-x-4 p-4 border border-brand-gray-200 rounded-lg"
                       >
                         {/* Product Image */}
-                        <div className="w-20 h-20 flex-shrink-0">
+                        <Link to={`/product/${item.id}`} className="w-20 h-20 flex-shrink-0">
                           <img
                             src={item.images[0]}
                             alt={item.name}
-                            className="w-full h-full object-cover rounded"
+                            className="w-full h-full object-cover rounded cursor-pointer hover:opacity-80 transition-opacity duration-300"
                           />
-                        </div>
+                        </Link>
 
                         {/* Product Details */}
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-semibold text-brand-black mb-1">
-                            {item.name}
-                          </h3>
+                          <Link to={`/product/${item.id}`}>
+                            <h3 className="text-lg font-semibold text-brand-black mb-1 hover:text-brand-gray-600 transition-colors duration-300 cursor-pointer">
+                              {item.name}
+                            </h3>
+                          </Link>
                           <p className="text-brand-gray-600 text-sm mb-2">
                             Color: {item.color} | Size: {item.size}
                           </p>

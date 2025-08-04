@@ -45,6 +45,19 @@ const Shop = () => {
     window.scrollTo(0, 0);
   }, [searchParams]);
 
+  // Auto-scroll to products when category is selected on mobile
+  useEffect(() => {
+    if (selectedCategory && window.innerWidth < 1024) {
+      // Scroll to products section after a short delay
+      setTimeout(() => {
+        const productsSection = document.querySelector('[data-products-section]');
+        if (productsSection) {
+          productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+    }
+  }, [selectedCategory]);
+
   // Filter and sort products
   const filteredProducts = products.filter(product => {
     // Search filter
@@ -427,7 +440,7 @@ const Shop = () => {
           </motion.div>
 
           {/* Products Section */}
-          <div className="flex-1">
+          <div className="flex-1" data-products-section>
             
             {/* Toolbar */}
             <motion.div
@@ -510,7 +523,7 @@ const Shop = () => {
               ) : (
                 <div className={`grid gap-3 sm:gap-4 md:gap-6 ${
                   viewMode === 'grid' 
-                    ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4' 
+                    ? 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3' 
                     : 'grid-cols-1'
                 }`}>
                   <AnimatePresence>

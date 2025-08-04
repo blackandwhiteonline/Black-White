@@ -106,7 +106,7 @@ const Wishlist = () => {
                     <div className="card-premium overflow-hidden relative">
                       
                       {/* Product Image */}
-                      <div className="relative overflow-hidden aspect-square">
+                      <Link to={`/product/${product.id}`} className="relative overflow-hidden aspect-square">
                         <img
                           src={product.images[0]}
                           alt={product.name}
@@ -147,7 +147,7 @@ const Wishlist = () => {
                         <div className="absolute top-4 right-4 bg-red-500 text-brand-white p-2 rounded-full">
                           <Heart size={16} className="fill-current" />
                         </div>
-                      </div>
+                      </Link>
 
                       {/* Product Info */}
                       <div className="p-6">
@@ -157,9 +157,11 @@ const Wishlist = () => {
                           </span>
                         </div>
                         
-                        <h3 className="text-lg font-semibold text-brand-black mb-2 line-clamp-2">
-                          {product.name}
-                        </h3>
+                        <Link to={`/product/${product.id}`}>
+                          <h3 className="text-lg font-semibold text-brand-black mb-2 line-clamp-2 hover:text-brand-gray-600 transition-colors duration-300 cursor-pointer">
+                            {product.name}
+                          </h3>
+                        </Link>
                         
                         <div className="flex items-center space-x-2 mb-3">
                           <div className="flex items-center">

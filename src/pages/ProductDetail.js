@@ -345,9 +345,9 @@ const ProductDetail = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleAddToCart}
-                className="flex-1 btn-primary py-4 text-lg"
+                className="flex-1 btn-primary py-3 text-base"
               >
-                <ShoppingBag className="mr-2" size={20} />
+                <ShoppingBag className="mr-2" size={18} />
                 Add to Cart
               </motion.button>
               
@@ -355,7 +355,7 @@ const ProductDetail = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={handleWishlistToggle}
-                className={`p-4 border-2 transition-all duration-300 ${
+                className={`p-3 border-2 transition-all duration-300 rounded-lg ${
                   isInWishlist(product.id)
                     ? 'border-red-500 bg-red-500 text-white'
                     : 'border-brand-black hover:bg-brand-black hover:text-brand-white'
@@ -363,7 +363,7 @@ const ProductDetail = () => {
                 title={isInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
               >
                 <Heart 
-                  size={20} 
+                  size={18} 
                   className={isInWishlist(product.id) ? 'fill-white text-white' : ''}
                 />
               </motion.button>
