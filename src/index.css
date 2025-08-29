@@ -14,6 +14,12 @@
     color: #000000;
   }
   
+  /* Improve mobile typography and tap targets */
+  @media (max-width: 640px) {
+    body { line-height: 1.5; }
+    button, a, input, select { min-height: 44px; }
+  }
+  
   /* Custom scrollbar for premium feel */
   ::-webkit-scrollbar {
     width: 8px;
@@ -34,32 +40,76 @@
 }
 
 @layer components {
-  /* Premium button styles */
+  /* Premium button styles - Fixed scaling and improved design */
   .btn-primary {
-    @apply bg-brand-black text-brand-white px-4 py-2 sm:px-6 sm:py-3 rounded-none font-medium 
-           transition-all duration-300 hover:bg-brand-gray-800 hover:scale-105 
+    @apply bg-brand-black text-white px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg font-medium 
+           transition-all duration-300 hover:bg-brand-gray-800 
            focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-2
-           text-sm sm:text-base;
+           text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md
+           flex items-center justify-center space-x-1 sm:space-x-2;
   }
   
   .btn-secondary {
-    @apply bg-transparent text-brand-black border-2 border-brand-black px-4 py-2 sm:px-6 sm:py-3 
-           rounded-none font-medium transition-all duration-300 
-           hover:bg-brand-black hover:text-brand-white hover:scale-105
-           text-sm sm:text-base;
+    @apply bg-transparent text-brand-black border-2 border-brand-black px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 
+           rounded-lg font-medium transition-all duration-300 
+           hover:bg-brand-black hover:text-white
+           text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md
+           flex items-center justify-center space-x-1 sm:space-x-2;
+  }
+
+  /* Hero button styles - Special styling for hero section buttons */
+  .btn-hero {
+    @apply bg-brand-black text-white px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 rounded-lg font-semibold
+           transition-all duration-300 hover:bg-brand-gray-800 
+           focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-2
+           text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl
+           flex items-center justify-center space-x-2;
+  }
+
+  /* Action button styles - For product cards and actions */
+  .btn-action {
+    @apply bg-brand-black text-white px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 rounded-lg font-medium 
+           transition-all duration-300 hover:bg-brand-gray-800 
+           focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-1
+           text-xs sm:text-sm md:text-base shadow-sm hover:shadow-md
+           flex items-center justify-center;
   }
   
   /* Premium card styles */
   .card-premium {
     @apply bg-brand-white border border-brand-gray-200 shadow-lg 
-           transition-all duration-300 hover:shadow-xl hover:scale-105
-           p-3 sm:p-6;
+           transition-all duration-300 hover:shadow-xl
+           p-4 sm:p-6 cursor-pointer;
+  }
+  
+  .card-premium:hover {
+    @apply transform -translate-y-1 shadow-2xl;
+  }
+  
+  /* Product card specific styles */
+  .product-card {
+    @apply bg-brand-white border border-brand-gray-200 shadow-md 
+           transition-all duration-300 hover:shadow-lg
+           cursor-pointer overflow-hidden h-full flex flex-col;
+  }
+  
+  .product-card:hover {
+    @apply transform -translate-y-1 shadow-2xl;
+  }
+  
+  .product-card img {
+    @apply transition-transform duration-500;
+  }
+  
+  .product-card:hover img {
+    @apply scale-105;
   }
   
   /* Premium input styles */
   .input-premium {
     @apply w-full px-3 py-2 sm:px-4 sm:py-3 border border-brand-gray-300 focus:border-brand-black 
-           focus:outline-none transition-all duration-300 bg-brand-white text-sm sm:text-base;
+           focus:outline-none transition-all duration-300 bg-brand-white text-sm sm:text-base
+           rounded-lg focus:ring-2 focus:ring-brand-black focus:ring-offset-1;
   }
   
   /* Premium text styles */
@@ -69,6 +119,51 @@
   
   .text-modern {
     @apply font-modern text-brand-black;
+  }
+
+  /* Filter section styles - Fixed scaling issues */
+  .filter-section {
+    @apply bg-white border border-gray-200 rounded-lg shadow-sm p-6 
+           transition-all duration-300 hover:shadow-md;
+  }
+
+  .filter-option {
+    @apply w-full text-left p-3 rounded-lg transition-all duration-300 
+           hover:bg-brand-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-1
+           bg-white border border-transparent;
+  }
+
+  .filter-option.selected {
+    @apply bg-brand-black text-white border-brand-black;
+  }
+
+  .filter-option:hover {
+    @apply bg-brand-gray-50 border-brand-gray-200;
+  }
+
+  .filter-option.selected:hover {
+    @apply bg-brand-gray-800 border-brand-gray-800;
+  }
+
+  /* Price range slider styles */
+  .price-slider {
+    @apply w-full h-3 bg-brand-gray-200 rounded-lg appearance-none cursor-pointer;
+  }
+
+  .price-slider::-webkit-slider-thumb {
+    @apply appearance-none w-6 h-6 bg-brand-black rounded-full cursor-pointer shadow-lg border-2 border-white;
+  }
+
+  .price-slider::-moz-range-thumb {
+    @apply w-6 h-6 bg-brand-black rounded-full cursor-pointer border-2 border-white shadow-lg;
+  }
+
+  .price-slider::-webkit-slider-track {
+    @apply bg-brand-gray-200 rounded-lg h-3;
+  }
+
+  .price-slider::-moz-range-track {
+    @apply bg-brand-gray-200 rounded-lg h-3;
   }
   
   /* Animation classes */
@@ -105,68 +200,13 @@
     @apply opacity-100 translate-x-0;
   }
   
-  .animate-scale-in {
-    @apply opacity-0 scale-95 transition-all duration-800 ease-out;
-  }
-  
-  .animate-scale-in.animate {
-    @apply opacity-100 scale-100;
-  }
-  
-  /* Stagger animations for lists */
-  .animate-stagger > * {
-    @apply opacity-0 translate-y-10 transition-all duration-600 ease-out;
-  }
-  
-  .animate-stagger.animate > * {
-    @apply opacity-100 translate-y-0;
-  }
-  
-  .animate-stagger.animate > *:nth-child(1) { transition-delay: 0.1s; }
-  .animate-stagger.animate > *:nth-child(2) { transition-delay: 0.2s; }
-  .animate-stagger.animate > *:nth-child(3) { transition-delay: 0.3s; }
-  .animate-stagger.animate > *:nth-child(4) { transition-delay: 0.4s; }
-  .animate-stagger.animate > *:nth-child(5) { transition-delay: 0.5s; }
-  .animate-stagger.animate > *:nth-child(6) { transition-delay: 0.6s; }
-  
-  /* Hover effects */
-  .hover-lift {
-    @apply transition-transform duration-300 hover:-translate-y-2;
-  }
-  
-  .hover-glow {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-brand-black/20;
-  }
-  
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-  
-  .hover-rotate {
-    @apply transition-transform duration-300 hover:rotate-3;
-  }
-}
-
-@layer utilities {
-  /* Custom utilities for Black&White theme */
-  .text-gradient {
-    @apply bg-gradient-to-r from-brand-black to-brand-gray-600 bg-clip-text text-transparent;
-  }
-  
-  .bg-pattern {
-    background-image: 
-      radial-gradient(circle at 25% 25%, rgba(0,0,0,0.1) 1px, transparent 1px),
-      radial-gradient(circle at 75% 75%, rgba(0,0,0,0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-
-  /* Mobile-optimized utilities */
+  /* Mobile-specific utility classes */
   .mobile-compact {
-    @apply text-xs sm:text-sm md:text-base;
+    @apply text-sm sm:text-base;
   }
   
   .mobile-spacing {
-    @apply space-y-2 sm:space-y-4 md:space-y-6;
+    @apply space-y-2 sm:space-y-3;
   }
   
   .mobile-padding {
@@ -178,7 +218,7 @@
   }
   
   .mobile-grid {
-    @apply grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5;
+    @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
   }
   
   .mobile-text {
@@ -186,7 +226,7 @@
   }
   
   .mobile-heading {
-    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
   }
   
   .mobile-section {
@@ -194,10 +234,10 @@
   }
   
   .mobile-container {
-    @apply px-3 sm:px-4 md:px-6 lg:px-8;
+    @apply px-3 sm:px-4 lg:px-8;
   }
 
-  /* Mobile-specific animations */
+  /* Mobile animations */
   .mobile-slide-up {
     @apply transform translate-y-4 opacity-0 transition-all duration-500 ease-out;
   }
@@ -207,7 +247,7 @@
   }
   
   .mobile-fade-in {
-    @apply opacity-0 transition-opacity duration-700 ease-out;
+    @apply opacity-0 transition-opacity duration-500 ease-out;
   }
   
   .mobile-fade-in.animate {
@@ -215,19 +255,118 @@
   }
   
   .mobile-scale-in {
-    @apply transform scale-95 opacity-0 transition-all duration-600 ease-out;
+    @apply transform scale-95 opacity-0 transition-all duration-500 ease-out;
   }
   
   .mobile-scale-in.animate {
     @apply scale-100 opacity-100;
   }
-  
+
   /* Mobile hover effects */
   .mobile-tap {
     @apply active:scale-95 transition-transform duration-150;
   }
   
   .mobile-lift {
-    @apply active:-translate-y-1 transition-transform duration-200;
+    @apply hover:transform hover:-translate-y-1 transition-all duration-300;
+  }
+}
+
+@layer utilities {
+  /* Custom utilities for better mobile experience */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Premium shadows */
+  .shadow-premium {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .shadow-premium-hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+} 
+
+    /* Enhanced filter section styling */
+    .filter-section {
+      @apply bg-white border-2 border-brand-gray-100 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500;
+    }
+    
+    .filter-option {
+      @apply bg-white border border-transparent rounded-xl transition-all duration-300 cursor-pointer;
+    }
+    
+    .filter-option:hover {
+      @apply border-brand-gray-200 shadow-md;
+    }
+    
+    .filter-option.selected {
+      @apply border-brand-black;
+    }
+    
+    .filter-option.selected:hover {
+      @apply bg-brand-gray-800 border-brand-gray-800;
+    }
+    
+    /* Enhanced price slider styling */
+    .price-slider {
+      @apply appearance-none bg-brand-gray-200 rounded-lg h-3 outline-none;
+    }
+    
+    .price-slider::-webkit-slider-thumb {
+      @apply appearance-none w-6 h-6 bg-brand-black rounded-full cursor-pointer shadow-lg hover:shadow-xl transition-all duration-300;
+    }
+    
+    .price-slider::-moz-range-thumb {
+      @apply appearance-none w-6 h-6 bg-brand-black rounded-full cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300;
+    }
+    
+    /* Enhanced input styling */
+    .input-premium {
+      @apply w-full px-4 py-3 border-2 border-brand-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-black focus:border-transparent transition-all duration-300 hover:border-brand-gray-300;
+    }
+    
+    /* Enhanced product card styling */
+    .product-card {
+      @apply bg-white border border-brand-gray-200 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden;
+    }
+    
+    .product-card:hover {
+      @apply transform -translate-y-1;
+    }
+    
+    /* Enhanced button animations */
+    .btn-primary, .btn-secondary, .btn-hero, .btn-action {
+      @apply transform transition-all duration-300;
+    }
+    
+    .btn-primary:hover, .btn-secondary:hover, .btn-hero:hover, .btn-action:hover {
+      @apply scale-105 shadow-lg;
+    }
+    
+    /* Enhanced mobile responsiveness */
+    @media (max-width: 768px) {
+      .filter-section {
+        @apply mx-4 mb-6;
+      }
+      
+      .product-card {
+        @apply mx-2;
   }
 } 

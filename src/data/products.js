@@ -1495,7 +1495,7 @@ export const products = [
 export const categories = {
   'mens-topwear': {
     name: 'Men\'s Topwear',
-    description: 'Premium shirts, t-shirts & more',
+    description: 'Premium tops & shirts',
     image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
     subcategories: {
       't-shirts': 'T-Shirts',
@@ -1574,19 +1574,19 @@ export const categories = {
 };
 
 // Helper functions
-export const getProductsByCategory = (category) => {
+export const getProductsByCategory = (products, category) => {
   return products.filter(product => product.category === category);
 };
 
-export const getProductsBySubcategory = (subcategory) => {
+export const getProductsBySubcategory = (products, subcategory) => {
   return products.filter(product => product.subcategory === subcategory);
 };
 
-export const getProductById = (id) => {
+export const getProductById = (products, id) => {
   return products.find(product => product.id === id);
 };
 
-export const searchProducts = (query) => {
+export const searchProducts = (products, query) => {
   const lowercaseQuery = query.toLowerCase();
   return products.filter(product => 
     product.name.toLowerCase().includes(lowercaseQuery) ||
@@ -1596,11 +1596,11 @@ export const searchProducts = (query) => {
   );
 };
 
-export const getProductsByGender = (gender) => {
+export const getProductsByGender = (products, gender) => {
   return products.filter(product => product.gender === gender);
 };
 
-export const getSimilarProducts = (product, limit = 4) => {
+export const getSimilarProducts = (products, product, limit = 4) => {
   return products
     .filter(p => 
       p.id !== product.id && 

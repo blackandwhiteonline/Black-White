@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const WishlistContext = createContext();
 
@@ -36,15 +37,24 @@ export const WishlistProvider = ({ children }) => {
     setWishlist(prevWishlist => {
       const isAlreadyInWishlist = prevWishlist.some(item => item.id === product.id);
       if (isAlreadyInWishlist) {
+        toast.error(`${product.name} is already in your wishlist`, { duration: 3000 });
         return prevWishlist; // Item already in wishlist
       }
+      toast.success(`${product.name} added to wishlist`, { duration: 3000 });
       return [...prevWishlist, { ...product, addedAt: new Date().toISOString() }];
     });
   };
 
   // Remove item from wishlist
   const removeFromWishlist = (productId) => {
-    setWishlist(prevWishlist => prevWishlist.filter(item => item.id !== productId));
+    setWishlist(prevWishlist => {
+      const product = prevWishlist.find(item => item.id === productId);
+      const newWishlist = prevWishlist.filter(item => item.id !== productId);
+      if (product) {
+        toast.success(`${product.name} removed from wishlist`, { duration: 3000 });
+      }
+      return newWishlist;
+    });
   };
 
   // Check if item is in wishlist
@@ -60,14 +70,16 @@ export const WishlistProvider = ({ children }) => {
   // Clear entire wishlist
   const clearWishlist = () => {
     setWishlist([]);
+    toast.success('Wishlist cleared successfully', { duration: 3000 });
   };
 
   // Move item from wishlist to cart
   const moveToCart = (productId, addToCart) => {
     const product = wishlist.find(item => item.id === productId);
     if (product) {
-      addToCart(product, 1, product.sizes[0] || 'M', product.colors[0] || 'Black');
+      addToCart(product, 1, product.sizes?.[0] || 'M', product.colors?.[0] || 'Black');
       removeFromWishlist(productId);
+      toast.success(`${product.name} moved to cart`, { duration: 3000 });
     }
   };
 

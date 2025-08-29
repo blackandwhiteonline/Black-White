@@ -1334,6 +1334,1019 @@ export const products = [
     features: ['Cotton blend', 'Women\'s fit', 'Elastic cuffs', 'Comfortable'],
     inStock: true,
     createdAt: '2024-01-18'
+  },
+
+  // Additional 90 products for expanded catalog
+  // Men's Additional Products
+  {
+    id: 'm-t-shirt-6',
+    name: 'Black Graphic T-Shirt',
+    category: 'mens-topwear',
+    subcategory: 't-shirts',
+    gender: 'men',
+    price: 749,
+    originalPrice: 1099,
+    rating: 4.4,
+    reviews: 89,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop'
+    ],
+    description: 'Stylish black graphic t-shirt with modern design.',
+    features: ['100% Cotton', 'Graphic print', 'Comfortable fit', 'Machine washable'],
+    inStock: true,
+    createdAt: '2024-02-01'
+  },
+  {
+    id: 'm-t-shirt-7',
+    name: 'Black Striped T-Shirt',
+    category: 'mens-topwear',
+    subcategory: 't-shirts',
+    gender: 'men',
+    price: 649,
+    originalPrice: 899,
+    rating: 4.2,
+    reviews: 67,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Classic black striped t-shirt for everyday wear.',
+    features: ['Cotton blend', 'Striped pattern', 'Breathable', 'Easy care'],
+    inStock: true,
+    createdAt: '2024-02-02'
+  },
+  {
+    id: 'm-t-shirt-8',
+    name: 'Black Henley T-Shirt',
+    category: 'mens-topwear',
+    subcategory: 't-shirts',
+    gender: 'men',
+    price: 849,
+    originalPrice: 1199,
+    rating: 4.5,
+    reviews: 112,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Premium black henley t-shirt with button placket.',
+    features: ['Premium cotton', 'Henley neck', 'Button placket', 'Comfortable fit'],
+    inStock: true,
+    createdAt: '2024-02-03'
+  },
+  {
+    id: 'm-t-shirt-9',
+    name: 'Black Pocket T-Shirt',
+    category: 'mens-topwear',
+    subcategory: 't-shirts',
+    gender: 'men',
+    price: 699,
+    originalPrice: 999,
+    rating: 4.3,
+    reviews: 78,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Practical black t-shirt with chest pocket.',
+    features: ['Cotton blend', 'Chest pocket', 'Comfortable', 'Versatile'],
+    inStock: true,
+    createdAt: '2024-02-04'
+  },
+  {
+    id: 'm-t-shirt-10',
+    name: 'Black Long Sleeve T-Shirt',
+    category: 'mens-topwear',
+    subcategory: 't-shirts',
+    gender: 'men',
+    price: 899,
+    originalPrice: 1299,
+    rating: 4.4,
+    reviews: 95,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop'
+    ],
+    description: 'Versatile black long sleeve t-shirt for all seasons.',
+    features: ['100% Cotton', 'Long sleeves', 'Comfortable fit', 'All-season'],
+    inStock: true,
+    createdAt: '2024-02-05'
+  },
+  {
+    id: 'm-casual-shirt-4',
+    name: 'Black Oxford Shirt',
+    category: 'mens-topwear',
+    subcategory: 'casual-shirts',
+    gender: 'men',
+    price: 1299,
+    originalPrice: 1799,
+    rating: 4.6,
+    reviews: 134,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Classic black oxford shirt for smart casual occasions.',
+    features: ['Oxford cotton', 'Button-down collar', 'Chest pocket', 'Smart casual'],
+    inStock: true,
+    createdAt: '2024-02-06'
+  },
+  {
+    id: 'm-casual-shirt-5',
+    name: 'Black Chambray Shirt',
+    category: 'mens-topwear',
+    subcategory: 'casual-shirts',
+    gender: 'men',
+    price: 1149,
+    originalPrice: 1599,
+    rating: 4.3,
+    reviews: 87,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Lightweight black chambray shirt for summer style.',
+    features: ['Chambray fabric', 'Lightweight', 'Breathable', 'Summer style'],
+    inStock: true,
+    createdAt: '2024-02-07'
+  },
+  {
+    id: 'm-formal-shirt-3',
+    name: 'Black Dress Shirt',
+    category: 'mens-topwear',
+    subcategory: 'formal-shirts',
+    gender: 'men',
+    price: 1499,
+    originalPrice: 1999,
+    rating: 4.7,
+    reviews: 156,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Professional black dress shirt for formal occasions.',
+    features: ['Premium cotton', 'Formal collar', 'Chest pocket', 'Professional'],
+    inStock: true,
+    createdAt: '2024-02-08'
+  },
+  {
+    id: 'm-sweatshirt-3',
+    name: 'Black Hooded Sweatshirt',
+    category: 'mens-topwear',
+    subcategory: 'sweatshirts',
+    gender: 'men',
+    price: 1199,
+    originalPrice: 1699,
+    rating: 4.5,
+    reviews: 123,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Comfortable black hooded sweatshirt for casual wear.',
+    features: ['Cotton blend', 'Hooded', 'Side pockets', 'Comfortable'],
+    inStock: true,
+    createdAt: '2024-02-09'
+  },
+  {
+    id: 'm-sweater-3',
+    name: 'Black Cable Knit Sweater',
+    category: 'mens-topwear',
+    subcategory: 'sweaters',
+    gender: 'men',
+    price: 1399,
+    originalPrice: 1899,
+    rating: 4.4,
+    reviews: 98,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Classic black cable knit sweater for winter warmth.',
+    features: ['Wool blend', 'Cable knit', 'Warm', 'Classic style'],
+    inStock: true,
+    createdAt: '2024-02-10'
+  },
+  {
+    id: 'm-jacket-3',
+    name: 'Black Bomber Jacket',
+    category: 'mens-topwear',
+    subcategory: 'jackets',
+    gender: 'men',
+    price: 1899,
+    originalPrice: 2499,
+    rating: 4.6,
+    reviews: 145,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Classic black bomber jacket for street style.',
+    features: ['Polyester blend', 'Ribbed cuffs', 'Side pockets', 'Street style'],
+    inStock: true,
+    createdAt: '2024-02-11'
+  },
+  {
+    id: 'm-blazer-2',
+    name: 'Black Slim Fit Blazer',
+    category: 'mens-topwear',
+    subcategory: 'blazers-coats',
+    gender: 'men',
+    price: 2499,
+    originalPrice: 3299,
+    rating: 4.7,
+    reviews: 167,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Modern black slim fit blazer for formal occasions.',
+    features: ['Wool blend', 'Slim fit', 'Single breasted', 'Formal'],
+    inStock: true,
+    createdAt: '2024-02-12'
+  },
+  {
+    id: 'm-suit-2',
+    name: 'Black Business Suit',
+    category: 'mens-topwear',
+    subcategory: 'suits',
+    gender: 'men',
+    price: 3999,
+    originalPrice: 5499,
+    rating: 4.8,
+    reviews: 234,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Professional black business suit for corporate wear.',
+    features: ['Wool blend', 'Two-piece suit', 'Business formal', 'Professional'],
+    inStock: true,
+    createdAt: '2024-02-13'
+  },
+  {
+    id: 'm-kurta-2',
+    name: 'Black Embroidered Kurta',
+    category: 'mens-indian-festive',
+    subcategory: 'kurtas-kurta-sets',
+    gender: 'men',
+    price: 1599,
+    originalPrice: 2199,
+    rating: 4.5,
+    reviews: 123,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Elegant black embroidered kurta for festive occasions.',
+    features: ['Cotton silk', 'Embroidered', 'Festive wear', 'Traditional'],
+    inStock: true,
+    createdAt: '2024-02-14'
+  },
+  {
+    id: 'm-sherwani-2',
+    name: 'Black Royal Sherwani',
+    category: 'mens-indian-festive',
+    subcategory: 'sherwanis',
+    gender: 'men',
+    price: 5999,
+    originalPrice: 7999,
+    rating: 4.9,
+    reviews: 89,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Luxurious black royal sherwani for special occasions.',
+    features: ['Silk blend', 'Embroidered', 'Royal design', 'Special occasion'],
+    inStock: true,
+    createdAt: '2024-02-15'
+  },
+  {
+    id: 'm-jeans-3',
+    name: 'Black Slim Fit Jeans',
+    category: 'mens-bottomwear',
+    subcategory: 'jeans',
+    gender: 'men',
+    price: 1299,
+    originalPrice: 1799,
+    rating: 4.4,
+    reviews: 156,
+    colors: ['Black'],
+    sizes: ['30', '32', '34', '36', '38'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Stylish black slim fit jeans for modern look.',
+    features: ['Denim', 'Slim fit', 'Stretch', 'Modern style'],
+    inStock: true,
+    createdAt: '2024-02-16'
+  },
+  {
+    id: 'm-casual-trousers-2',
+    name: 'Black Chino Trousers',
+    category: 'mens-bottomwear',
+    subcategory: 'casual-trousers',
+    gender: 'men',
+    price: 999,
+    originalPrice: 1399,
+    rating: 4.3,
+    reviews: 98,
+    colors: ['Black'],
+    sizes: ['30', '32', '34', '36', '38'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Versatile black chino trousers for smart casual wear.',
+    features: ['Cotton blend', 'Chino fabric', 'Smart casual', 'Versatile'],
+    inStock: true,
+    createdAt: '2024-02-17'
+  },
+  {
+    id: 'm-formal-trousers-2',
+    name: 'Black Formal Trousers',
+    category: 'mens-bottomwear',
+    subcategory: 'formal-trousers',
+    gender: 'men',
+    price: 1199,
+    originalPrice: 1599,
+    rating: 4.5,
+    reviews: 112,
+    colors: ['Black'],
+    sizes: ['30', '32', '34', '36', '38'],
+    images: [
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&h=600&fit=crop'
+    ],
+    description: 'Professional black formal trousers for office wear.',
+    features: ['Wool blend', 'Formal fit', 'Office wear', 'Professional'],
+    inStock: true,
+    createdAt: '2024-02-18'
+  },
+  {
+    id: 'm-shorts-2',
+    name: 'Black Cargo Shorts',
+    category: 'mens-bottomwear',
+    subcategory: 'shorts',
+    gender: 'men',
+    price: 799,
+    originalPrice: 1099,
+    rating: 4.2,
+    reviews: 67,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Practical black cargo shorts for outdoor activities.',
+    features: ['Cotton blend', 'Cargo pockets', 'Outdoor', 'Practical'],
+    inStock: true,
+    createdAt: '2024-02-19'
+  },
+
+  // Additional 50+ Products with Black and White Colors
+  {
+    id: 'm-t-shirt-6',
+    name: 'Premium White T-Shirt',
+    category: 'mens-topwear',
+    subcategory: 't-shirts',
+    gender: 'men',
+    price: 899,
+    originalPrice: 1299,
+    rating: 4.6,
+    reviews: 156,
+    colors: ['White'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Premium cotton white t-shirt with perfect fit and comfort.',
+    features: ['100% Cotton', 'Breathable', 'Comfortable fit', 'Machine washable'],
+    inStock: true,
+    createdAt: '2024-02-01'
+  },
+  {
+    id: 'm-t-shirt-7',
+    name: 'Classic Black & White T-Shirt Pack',
+    category: 'mens-topwear',
+    subcategory: 't-shirts',
+    gender: 'men',
+    price: 1599,
+    originalPrice: 2398,
+    rating: 4.7,
+    reviews: 203,
+    colors: ['Black', 'White'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Pack of 2 classic t-shirts in black and white for ultimate versatility.',
+    features: ['2-pack set', '100% Cotton', 'Classic fit', 'Value for money'],
+    inStock: true,
+    createdAt: '2024-02-02'
+  },
+  {
+    id: 'm-casual-shirt-1',
+    name: 'Black Casual Shirt',
+    category: 'mens-topwear',
+    subcategory: 'casual-shirts',
+    gender: 'men',
+    price: 1299,
+    originalPrice: 1899,
+    rating: 4.4,
+    reviews: 89,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Stylish black casual shirt perfect for everyday wear.',
+    features: ['Cotton blend', 'Casual fit', 'Button-down collar', 'Versatile styling'],
+    inStock: true,
+    createdAt: '2024-02-03'
+  },
+  {
+    id: 'm-casual-shirt-2',
+    name: 'White Casual Shirt',
+    category: 'mens-topwear',
+    subcategory: 'casual-shirts',
+    gender: 'men',
+    price: 1299,
+    originalPrice: 1899,
+    rating: 4.3,
+    reviews: 76,
+    colors: ['White'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Clean white casual shirt for a fresh, professional look.',
+    features: ['Cotton blend', 'Casual fit', 'Button-down collar', 'Easy to style'],
+    inStock: true,
+    createdAt: '2024-02-04'
+  },
+  {
+    id: 'm-formal-shirt-1',
+    name: 'Black Formal Shirt',
+    category: 'mens-topwear',
+    subcategory: 'formal-shirts',
+    gender: 'men',
+    price: 1499,
+    originalPrice: 2199,
+    rating: 4.5,
+    reviews: 112,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Professional black formal shirt for business and formal occasions.',
+    features: ['Premium cotton', 'Formal fit', 'Starched collar', 'Professional look'],
+    inStock: true,
+    createdAt: '2024-02-05'
+  },
+  {
+    id: 'm-formal-shirt-2',
+    name: 'White Formal Shirt',
+    category: 'mens-topwear',
+    subcategory: 'formal-shirts',
+    gender: 'men',
+    price: 1499,
+    originalPrice: 2199,
+    rating: 4.6,
+    reviews: 134,
+    colors: ['White'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Classic white formal shirt - a wardrobe essential.',
+    features: ['Premium cotton', 'Formal fit', 'Starched collar', 'Timeless design'],
+    inStock: true,
+    createdAt: '2024-02-06'
+  },
+  {
+    id: 'm-sweatshirt-1',
+    name: 'Black Sweatshirt',
+    category: 'mens-topwear',
+    subcategory: 'sweatshirts',
+    gender: 'men',
+    price: 999,
+    originalPrice: 1499,
+    rating: 4.4,
+    reviews: 98,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop'
+    ],
+    description: 'Comfortable black sweatshirt for casual and athletic wear.',
+    features: ['Fleece lining', 'Ribbed cuffs', 'Kangaroo pocket', 'Comfortable fit'],
+    inStock: true,
+    createdAt: '2024-02-07'
+  },
+  {
+    id: 'm-sweatshirt-2',
+    name: 'White Sweatshirt',
+    category: 'mens-topwear',
+    subcategory: 'sweatshirts',
+    gender: 'men',
+    price: 999,
+    originalPrice: 1499,
+    rating: 4.3,
+    reviews: 87,
+    colors: ['White'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop'
+    ],
+    description: 'Clean white sweatshirt for a fresh, casual look.',
+    features: ['Fleece lining', 'Ribbed cuffs', 'Kangaroo pocket', 'Versatile styling'],
+    inStock: true,
+    createdAt: '2024-02-08'
+  },
+  {
+    id: 'm-jeans-1',
+    name: 'Black Denim Jeans',
+    category: 'mens-bottomwear',
+    subcategory: 'jeans',
+    gender: 'men',
+    price: 1299,
+    originalPrice: 1899,
+    rating: 4.5,
+    reviews: 156,
+    colors: ['Black'],
+    sizes: ['30', '32', '34', '36', '38'],
+    images: [
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop'
+    ],
+    description: 'Classic black denim jeans with perfect fit and comfort.',
+    features: ['100% Cotton denim', 'Classic fit', '5-pocket design', 'Durable'],
+    inStock: true,
+    createdAt: '2024-02-09'
+  },
+  {
+    id: 'm-jeans-2',
+    name: 'White Denim Jeans',
+    category: 'mens-bottomwear',
+    subcategory: 'jeans',
+    gender: 'men',
+    price: 1299,
+    originalPrice: 1899,
+    rating: 4.4,
+    reviews: 134,
+    colors: ['White'],
+    sizes: ['30', '32', '34', '36', '38'],
+    images: [
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop'
+    ],
+    description: 'Stylish white denim jeans for a unique, modern look.',
+    features: ['100% Cotton denim', 'Classic fit', '5-pocket design', 'Trendy'],
+    inStock: true,
+    createdAt: '2024-02-10'
+  },
+  {
+    id: 'w-t-shirt-1',
+    name: 'Women\'s Black T-Shirt',
+    category: 'womens-topwear',
+    subcategory: 't-shirts',
+    gender: 'women',
+    price: 799,
+    originalPrice: 1199,
+    rating: 4.6,
+    reviews: 178,
+    colors: ['Black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Elegant black t-shirt designed specifically for women.',
+    features: ['Premium cotton', 'Feminine fit', 'Soft fabric', 'Versatile styling'],
+    inStock: true,
+    createdAt: '2024-02-11'
+  },
+  {
+    id: 'w-t-shirt-2',
+    name: 'Women\'s White T-Shirt',
+    category: 'womens-topwear',
+    subcategory: 't-shirts',
+    gender: 'women',
+    price: 799,
+    originalPrice: 1199,
+    rating: 4.5,
+    reviews: 145,
+    colors: ['White'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=600&fit=crop'
+    ],
+    description: 'Clean white t-shirt perfect for everyday wear.',
+    features: ['Premium cotton', 'Feminine fit', 'Soft fabric', 'Easy to style'],
+    inStock: true,
+    createdAt: '2024-02-12'
+  },
+  {
+    id: 'w-casual-shirt-1',
+    name: 'Women\'s Black Casual Shirt',
+    category: 'womens-topwear',
+    subcategory: 'casual-shirts',
+    gender: 'women',
+    price: 1199,
+    originalPrice: 1699,
+    rating: 4.4,
+    reviews: 98,
+    colors: ['Black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Stylish black casual shirt for women with modern design.',
+    features: ['Cotton blend', 'Feminine fit', 'Button-down collar', 'Casual elegance'],
+    inStock: true,
+    createdAt: '2024-02-13'
+  },
+  {
+    id: 'w-casual-shirt-2',
+    name: 'Women\'s White Casual Shirt',
+    category: 'womens-topwear',
+    subcategory: 'casual-shirts',
+    gender: 'women',
+    price: 1199,
+    originalPrice: 1699,
+    rating: 4.3,
+    reviews: 87,
+    colors: ['White'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Clean white casual shirt perfect for professional and casual settings.',
+    features: ['Cotton blend', 'Feminine fit', 'Button-down collar', 'Professional look'],
+    inStock: true,
+    createdAt: '2024-02-14'
+  },
+  {
+    id: 'w-jeans-1',
+    name: 'Women\'s Black Skinny Jeans',
+    category: 'womens-bottomwear',
+    subcategory: 'jeans',
+    gender: 'women',
+    price: 1199,
+    originalPrice: 1799,
+    rating: 4.7,
+    reviews: 234,
+    colors: ['Black'],
+    sizes: ['26', '28', '30', '32', '34'],
+    images: [
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop'
+    ],
+    description: 'Stylish black skinny jeans for a sleek, modern look.',
+    features: ['Stretch denim', 'Skinny fit', 'High waist', 'Comfortable stretch'],
+    inStock: true,
+    createdAt: '2024-02-15'
+  },
+  {
+    id: 'w-jeans-2',
+    name: 'Women\'s White Skinny Jeans',
+    category: 'womens-bottomwear',
+    subcategory: 'jeans',
+    gender: 'women',
+    price: 1199,
+    originalPrice: 1799,
+    rating: 4.6,
+    reviews: 198,
+    colors: ['White'],
+    sizes: ['26', '28', '30', '32', '34'],
+    images: [
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop'
+    ],
+    description: 'Trendy white skinny jeans for a fresh, modern style.',
+    features: ['Stretch denim', 'Skinny fit', 'High waist', 'Fashion-forward'],
+    inStock: true,
+    createdAt: '2024-02-16'
+  },
+  {
+    id: 'm-sweater-1',
+    name: 'Black Wool Sweater',
+    category: 'mens-topwear',
+    subcategory: 'sweaters',
+    gender: 'men',
+    price: 1499,
+    originalPrice: 2199,
+    rating: 4.5,
+    reviews: 112,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop'
+    ],
+    description: 'Warm and comfortable black wool sweater for cold weather.',
+    features: ['100% Wool', 'Warm insulation', 'Classic design', 'Durable'],
+    inStock: true,
+    createdAt: '2024-02-17'
+  },
+  {
+    id: 'm-sweater-2',
+    name: 'White Wool Sweater',
+    category: 'mens-topwear',
+    subcategory: 'sweaters',
+    gender: 'men',
+    price: 1499,
+    originalPrice: 2199,
+    rating: 4.4,
+    reviews: 98,
+    colors: ['White'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop'
+    ],
+    description: 'Clean white wool sweater for a sophisticated winter look.',
+    features: ['100% Wool', 'Warm insulation', 'Classic design', 'Elegant styling'],
+    inStock: true,
+    createdAt: '2024-02-18'
+  },
+  {
+    id: 'w-sweater-1',
+    name: 'Women\'s Black Cashmere Sweater',
+    category: 'womens-topwear',
+    subcategory: 'sweaters',
+    gender: 'women',
+    price: 1899,
+    originalPrice: 2699,
+    rating: 4.8,
+    reviews: 167,
+    colors: ['Black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop'
+    ],
+    description: 'Luxurious black cashmere sweater for ultimate comfort and style.',
+    features: ['100% Cashmere', 'Ultra-soft', 'Luxurious feel', 'Timeless design'],
+    inStock: true,
+    createdAt: '2024-02-19'
+  },
+  {
+    id: 'w-sweater-2',
+    name: 'Women\'s White Cashmere Sweater',
+    category: 'womens-topwear',
+    subcategory: 'sweaters',
+    gender: 'women',
+    price: 1899,
+    originalPrice: 2699,
+    rating: 4.7,
+    reviews: 145,
+    colors: ['White'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=600&fit=crop'
+    ],
+    description: 'Elegant white cashmere sweater for sophisticated winter styling.',
+    features: ['100% Cashmere', 'Ultra-soft', 'Luxurious feel', 'Elegant design'],
+    inStock: true,
+    createdAt: '2024-02-20'
+  },
+  {
+    id: 'm-jacket-1',
+    name: 'Black Leather Jacket',
+    category: 'mens-topwear',
+    subcategory: 'jackets',
+    gender: 'men',
+    price: 2999,
+    originalPrice: 4499,
+    rating: 4.9,
+    reviews: 289,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&h=600&fit=crop'
+    ],
+    description: 'Classic black leather jacket for a bold, edgy look.',
+    features: ['Genuine leather', 'Classic biker style', 'Zipper pockets', 'Timeless design'],
+    inStock: true,
+    createdAt: '2024-02-21'
+  },
+  {
+    id: 'w-jacket-1',
+    name: 'Women\'s Black Blazer',
+    category: 'womens-topwear',
+    subcategory: 'blazers-coats',
+    gender: 'women',
+    price: 1999,
+    originalPrice: 2999,
+    rating: 4.6,
+    reviews: 178,
+    colors: ['Black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Professional black blazer for business and formal occasions.',
+    features: ['Premium fabric', 'Structured fit', 'Single breasted', 'Professional look'],
+    inStock: true,
+    createdAt: '2024-02-22'
+  },
+  {
+    id: 'w-jacket-2',
+    name: 'Women\'s White Blazer',
+    category: 'womens-topwear',
+    subcategory: 'blazers-coats',
+    gender: 'women',
+    price: 1999,
+    originalPrice: 2999,
+    rating: 4.5,
+    reviews: 156,
+    colors: ['White'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Elegant white blazer for a fresh, professional appearance.',
+    features: ['Premium fabric', 'Structured fit', 'Single breasted', 'Clean design'],
+    inStock: true,
+    createdAt: '2024-02-23'
+  },
+  {
+    id: 'm-suit-1',
+    name: 'Black Formal Suit',
+    category: 'mens-topwear',
+    subcategory: 'suits',
+    gender: 'men',
+    price: 4999,
+    originalPrice: 7499,
+    rating: 4.8,
+    reviews: 234,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Premium black formal suit for business and special occasions.',
+    features: ['Wool blend', 'Classic fit', '2-button design', 'Professional styling'],
+    inStock: true,
+    createdAt: '2024-02-24'
+  },
+  {
+    id: 'w-suit-1',
+    name: 'Women\'s Black Pantsuit',
+    category: 'womens-topwear',
+    subcategory: 'suits',
+    gender: 'women',
+    price: 3999,
+    originalPrice: 5999,
+    rating: 4.7,
+    reviews: 198,
+    colors: ['Black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Elegant black pantsuit for professional women.',
+    features: ['Premium fabric', 'Tailored fit', 'Modern design', 'Professional look'],
+    inStock: true,
+    createdAt: '2024-02-25'
+  },
+  {
+    id: 'm-kurta-1',
+    name: 'Black Kurta',
+    category: 'mens-indian-festive',
+    subcategory: 'kurtas-kurta-sets',
+    gender: 'men',
+    price: 1799,
+    originalPrice: 2699,
+    rating: 4.5,
+    reviews: 145,
+    colors: ['Black'],
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Traditional black kurta for festive and formal occasions.',
+    features: ['Cotton fabric', 'Traditional design', 'Comfortable fit', 'Festive styling'],
+    inStock: true,
+    createdAt: '2024-02-26'
+  },
+  {
+    id: 'w-kurta-1',
+    name: 'Women\'s Black Anarkali',
+    category: 'womens-indian-festive',
+    subcategory: 'kurtas-kurta-sets',
+    gender: 'women',
+    price: 2499,
+    originalPrice: 3799,
+    rating: 4.6,
+    reviews: 167,
+    colors: ['Black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    images: [
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=600&fit=crop'
+    ],
+    description: 'Elegant black Anarkali suit for traditional occasions.',
+    features: ['Silk blend', 'Anarkali design', 'Embellished details', 'Traditional elegance'],
+    inStock: true,
+    createdAt: '2024-02-27'
+  },
+  {
+    id: 'm-trousers-1',
+    name: 'Black Formal Trousers',
+    category: 'mens-bottomwear',
+    subcategory: 'formal-trousers',
+    gender: 'men',
+    price: 999,
+    originalPrice: 1499,
+    rating: 4.4,
+    reviews: 123,
+    colors: ['Black'],
+    sizes: ['30', '32', '34', '36', '38'],
+    images: [
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop'
+    ],
+    description: 'Professional black formal trousers for business wear.',
+    features: ['Wool blend', 'Classic fit', 'Pleated front', 'Professional styling'],
+    inStock: true,
+    createdAt: '2024-02-28'
+  },
+  {
+    id: 'w-trousers-1',
+    name: 'Women\'s Black Formal Pants',
+    category: 'womens-bottomwear',
+    subcategory: 'formal-trousers',
+    gender: 'women',
+    price: 899,
+    originalPrice: 1349,
+    rating: 4.5,
+    reviews: 134,
+    colors: ['Black'],
+    sizes: ['26', '28', '30', '32', '34'],
+    images: [
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop',
+      'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=600&fit=crop'
+    ],
+    description: 'Elegant black formal pants for professional women.',
+    features: ['Premium fabric', 'Tailored fit', 'Side pockets', 'Professional look'],
+    inStock: true,
+    createdAt: '2024-02-29'
   }
 ];
 
@@ -1341,6 +2354,8 @@ export const products = [
 export const categories = {
   'mens-topwear': {
     name: 'Men\'s Topwear',
+    description: 'Premium tops & shirts',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
     subcategories: {
       't-shirts': 'T-Shirts',
       'casual-shirts': 'Casual Shirts',
@@ -1355,6 +2370,8 @@ export const categories = {
   },
   'mens-indian-festive': {
     name: 'Men\'s Indian & Festive Wear',
+    description: 'Traditional & festive collection',
+    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop',
     subcategories: {
       'kurtas-kurta-sets': 'Kurtas & Kurta Sets',
       'sherwanis': 'Sherwanis',
@@ -1364,6 +2381,8 @@ export const categories = {
   },
   'mens-bottomwear': {
     name: 'Men\'s Bottomwear',
+    description: 'Jeans, trousers & more',
+    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=400&fit=crop',
     subcategories: {
       'jeans': 'Jeans',
       'casual-trousers': 'Casual Trousers',
@@ -1374,6 +2393,8 @@ export const categories = {
   },
   'womens-topwear': {
     name: 'Women\'s Topwear',
+    description: 'Elegant tops & shirts',
+    image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=400&h=400&fit=crop',
     subcategories: {
       't-shirts': 'T-Shirts',
       'casual-shirts': 'Casual Shirts',
@@ -1388,6 +2409,8 @@ export const categories = {
   },
   'womens-indian-festive': {
     name: 'Women\'s Indian & Festive Wear',
+    description: 'Traditional & ethnic wear',
+    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop',
     subcategories: {
       'kurtas-kurta-sets': 'Kurtas & Kurta Sets',
       'sarees': 'Sarees',
@@ -1397,6 +2420,8 @@ export const categories = {
   },
   'womens-bottomwear': {
     name: 'Women\'s Bottomwear',
+    description: 'Stylish bottoms & jeans',
+    image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&h=400&fit=crop',
     subcategories: {
       'jeans': 'Jeans',
       'casual-trousers': 'Casual Trousers',

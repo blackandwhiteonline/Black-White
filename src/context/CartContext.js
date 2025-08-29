@@ -123,11 +123,59 @@ export const CartProvider = ({ children }) => {
       // TODO: Replace with actual checkout API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
+      // Create order object
+      const timestamp = Date.now();
+      const randomString = Math.random().toString(36).substring(2, 8).toUpperCase();
+      const orderId = `ORD-${timestamp}-${randomString}`;
+      
+      // Extract customer info from form data
+      const customerInfo = {
+        firstName: paymentData.firstName,
+        lastName: paymentData.lastName,
+        email: paymentData.email,
+        phone: paymentData.phone
+      };
+      
+      // Create shipping address
+      const shippingAddress = {
+        name: `${paymentData.firstName} ${paymentData.lastName}`,
+        street: paymentData.address,
+        city: paymentData.city,
+        state: paymentData.state,
+        zipCode: paymentData.pincode,
+        country: 'India'
+      };
+      
+      const order = {
+        id: orderId,
+        date: new Date().toISOString(),
+        status: 'Processing',
+        items: cartItems,
+        subtotal: getCartTotal(),
+        shipping: paymentData.shipping || 0,
+        discount: paymentData.discount || 0,
+        tax: 0, // Can be calculated based on location
+        total: paymentData.total || getCartTotal(),
+        paymentMethod: paymentData.paymentMethod,
+        customerInfo,
+        shippingAddress,
+        billingAddress: shippingAddress, // Using same as shipping for now
+        shippingMethod: 'Standard Shipping',
+        carrier: 'Standard Delivery',
+        trackingNumber: null,
+        paymentStatus: paymentData.paymentMethod === 'cod' ? 'Pending' : 'Paid'
+      };
+      
+      // Save order to localStorage
+      const existingOrders = JSON.parse(localStorage.getItem('blackwhite_orders') || '[]');
+      existingOrders.unshift(order); // Add new order at the beginning
+      localStorage.setItem('blackwhite_orders', JSON.stringify(existingOrders));
+      
       // Clear cart after successful checkout
-      clearCart();
+      setCartItems([]);
       
       toast.success('Order placed successfully!');
-      return { success: true, orderId: 'ORD-' + Date.now() };
+      return { success: true, orderId };
     } catch (error) {
       console.error('Checkout error:', error);
       toast.error('Checkout failed. Please try again.');

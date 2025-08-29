@@ -73,8 +73,8 @@ const Footer = () => {
   return (
     <footer className="bg-brand-black text-brand-white">
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           
           {/* Brand Section */}
           <div className="lg:col-span-2">
@@ -84,10 +84,10 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h3 className="text-2xl font-premium font-bold mb-4">
+              <h3 className="text-xl sm:text-2xl font-premium font-bold mb-3">
                 Black&White
               </h3>
-              <p className="text-brand-gray-300 mb-6 max-w-md">
+              <p className="text-brand-gray-300 mb-4 max-w-md text-sm sm:text-base leading-relaxed">
                 Premium clothing store specializing in black and white fashion for men and women. 
                 Discover elegant, timeless pieces that define your style.
               </p>
@@ -119,8 +119,13 @@ const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <h4 className="text-lg font-semibold mb-4">{section.title}</h4>
-              <ul className="space-y-2">
+              {/* Accordion for mobile */}
+              <details className="group lg:open:!block">
+                <summary className="list-none cursor-pointer select-none flex items-center justify-between lg:cursor-default">
+                  <h4 className="text-base sm:text-lg font-semibold py-2">{section.title}</h4>
+                  <span className="lg:hidden text-brand-gray-400 group-open:rotate-180 transition-transform">⌄</span>
+                </summary>
+              <ul className="space-y-2 pl-1">
                 {section.links.map((link) => (
                   <li key={link.name}>
                     <Link
@@ -132,6 +137,7 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
+              </details>
             </motion.div>
           ))}
         </div>
@@ -178,12 +184,12 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             
             {/* Copyright */}
-            <div className="text-brand-gray-400 text-sm">
+            <div className="text-brand-gray-400 text-xs sm:text-sm">
               © 2024 Black&White. All rights reserved.
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.name}
@@ -200,7 +206,7 @@ const Footer = () => {
             </div>
 
             {/* Payment Methods */}
-            <div className="flex items-center space-x-2 text-brand-gray-400 text-sm">
+            <div className="flex items-center space-x-2 text-brand-gray-400 text-xs sm:text-sm">
               <span>Secure payments:</span>
               <div className="flex items-center space-x-1">
                 <span className="px-2 py-1 bg-brand-gray-800 rounded text-xs">Visa</span>

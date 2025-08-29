@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Star, ShoppingBag, Heart } from 'lucide-react';
-import { products } from '../data/products';
+import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield, RefreshCw, Award, Users, Clock } from 'lucide-react';
+import { products } from '../data/products-enhanced';
 import { useCart } from '../context/CartContext';
-
+import { useWishlist } from '../context/WishlistContext';
+ 
 
 const Home = () => {
   // State management
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isWishlistHovered, setIsWishlistHovered] = useState(null);
+ 
   
   // Context hooks
   const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   
   // Scroll animations
   const { scrollY } = useScroll();
@@ -45,7 +47,7 @@ const Home = () => {
       image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1200&h=800&fit=crop",
       mobileImage: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=1000&fit=crop",
       cta: "Explore Traditional",
-      link: "/shop?category=mens-traditional"
+      link: "/shop?category=mens-indian-festive"
     },
     {
       title: "Contemporary Style",
@@ -54,7 +56,7 @@ const Home = () => {
       image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&h=800&fit=crop",
       mobileImage: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=1000&fit=crop",
       cta: "View Collection",
-      link: "/shop?category=mens-western"
+      link: "/shop?category=mens-topwear"
     }
   ];
 
@@ -67,25 +69,107 @@ const Home = () => {
   }, [heroSlides.length]);
 
   // Navigation functions
-  const goToSlide = (index) => {
+  const goToSlide = useCallback((index) => {
     setCurrentSlide(index);
-  };
+  }, []);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  };
+  }, [heroSlides.length]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
+  }, [heroSlides.length]);
+
+  // Reset auto-slide timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [heroSlides.length]);
+
+  // Keyboard navigation
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+    } else if (e.key === 'ArrowRight') {
+      nextSlide();
+    }
+  }, [prevSlide, nextSlide]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   // Featured products (first 6 products)
   const featuredProducts = products.slice(0, 6);
 
   // Handle add to cart
   const handleAddToCart = (product) => {
-    addToCart(product, 1, 'M', product.colors[0]);
+    // Redirect to product details page instead of adding to cart
+    window.location.href = `/#/product/${product.id}`;
   };
+
+  const handleWishlistToggle = (product, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
+  };
+
+  // Features data
+  const features = [
+    {
+      icon: Truck,
+      title: "Free Shipping",
+      description: "Free shipping on orders above ₹5,000",
+      color: "text-blue-600",
+      bgColor: "bg-blue-100"
+    },
+    {
+      icon: Shield,
+      title: "Secure Payment",
+      description: "100% secure payment processing",
+      color: "text-green-600",
+      bgColor: "bg-green-100"
+    },
+    {
+      icon: RefreshCw,
+      title: "Easy Returns",
+      description: "30-day return policy",
+      color: "text-purple-600",
+      bgColor: "bg-purple-100"
+    },
+    {
+      icon: Award,
+      title: "Premium Quality",
+      description: "Handpicked premium fabrics",
+      color: "text-orange-600",
+      bgColor: "bg-orange-100"
+    },
+    {
+      icon: Users,
+      title: "24/7 Support",
+      description: "Round the clock customer support",
+      color: "text-red-600",
+      bgColor: "bg-red-100"
+    },
+    {
+      icon: Clock,
+      title: "Fast Delivery",
+      description: "Quick delivery across India",
+      color: "text-indigo-600",
+      bgColor: "bg-indigo-100"
+    }
+  ];
 
   return (
     <div className="min-h-screen">
@@ -102,32 +186,27 @@ const Home = () => {
                 autoPlay
                 muted
                 loop
-                className="w-full h-full object-cover"
                 poster={heroSlides[currentSlide].mobileImage}
+                className="hidden sm:block w-full h-full object-cover"
               >
                 <source src={heroSlides[currentSlide].video} type="video/mp4" />
-                Your browser does not support the video tag.
               </video>
-              <div className="absolute inset-0 bg-black/40"></div>
+              <img
+                src={heroSlides[currentSlide].mobileImage}
+                alt={heroSlides[currentSlide].title}
+                className="sm:hidden w-full h-full object-cover"
+              />
             </div>
           ) : (
-            <div className="absolute inset-0">
-              {/* Desktop Image */}
-              <div 
-                className="hidden md:block absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${heroSlides[currentSlide].image})` }}
-              >
-                <div className="absolute inset-0 bg-black/40"></div>
-              </div>
-              {/* Mobile Image */}
-              <div 
-                className="md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${heroSlides[currentSlide].mobileImage})` }}
-              >
-                <div className="absolute inset-0 bg-black/40"></div>
-              </div>
-            </div>
+            <img
+              src={window.innerWidth < 640 ? heroSlides[currentSlide].mobileImage : heroSlides[currentSlide].image}
+              alt={heroSlides[currentSlide].title}
+              className="w-full h-full object-cover"
+            />
           )}
+          
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/40"></div>
         </motion.div>
 
         {/* Hero Content */}
@@ -135,14 +214,14 @@ const Home = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={heroInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative z-10 flex items-center justify-center h-full text-center text-brand-white"
+          className="relative z-10 flex items-center justify-center h-full text-center text-white px-3 sm:px-4 lg:px-8"
         >
-          <div className="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="max-w-4xl">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-premium font-bold mb-2 sm:mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-premium font-bold mb-3 sm:mb-4 md:mb-6"
             >
               {heroSlides[currentSlide].title}
             </motion.h1>
@@ -151,7 +230,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl font-modern mb-3 sm:mb-6"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium mb-3 sm:mb-4 md:mb-6 text-brand-gray-200"
             >
               {heroSlides[currentSlide].subtitle}
             </motion.p>
@@ -160,7 +239,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-sm sm:text-base md:text-lg text-brand-gray-200 mb-4 sm:mb-8 max-w-2xl mx-auto"
+              className="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 md:mb-8 text-brand-gray-300 max-w-2xl mx-auto"
             >
               {heroSlides[currentSlide].description}
             </motion.p>
@@ -171,221 +250,88 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Link to={heroSlides[currentSlide].link}>
+              <div className="flex justify-center">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="btn-primary text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-hero"
                 >
                   {heroSlides[currentSlide].cta}
-                  <ArrowRight className="ml-2 inline" size={20} />
+                  <ArrowRight className="ml-2" size={24} />
                 </motion.button>
+                </div>
               </Link>
             </motion.div>
           </div>
         </motion.div>
 
-        {/* Navigation Arrows */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-brand-black/50 hover:bg-brand-black/70 text-brand-white p-3 rounded-full transition-all duration-300 z-20"
-        >
-          <ArrowRight className="rotate-180" size={24} />
-        </motion.button>
-        
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-brand-black/50 hover:bg-brand-black/70 text-brand-white p-3 rounded-full transition-all duration-300 z-20"
-        >
-          <ArrowRight size={24} />
-        </motion.button>
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {/* Navigation Dots */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
           {heroSlides.map((_, index) => (
-            <motion.button
+            <button
               key={index}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.8 }}
               onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index ? 'bg-brand-white' : 'bg-brand-white/50'
+              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer ${
+                index === currentSlide ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'
               }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 text-white z-20 cursor-pointer"
+          aria-label="Previous slide"
+        >
+          <ArrowRight className="rotate-180" size={24} />
+        </button>
+        
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white/20 hover:bg-white/30 transition-all duration-300 text-white z-20 cursor-pointer"
+          aria-label="Next slide"
+        >
+          <ArrowRight size={24} />
+        </button>
       </section>
 
       {/* Features Section */}
-      <section ref={featuresRef} className="py-12 sm:py-16 md:py-20 bg-brand-white">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <section ref={featuresRef} className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-brand-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={featuresInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="text-center mb-8 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-3 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-premium font-bold text-brand-black mb-3 sm:mb-4 md:mb-6">
               Why Choose Black&White?
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600 max-w-3xl mx-auto">
-              Premium quality, timeless design, and exceptional craftsmanship in every piece.
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-brand-gray-600 max-w-3xl mx-auto">
+              We're committed to providing you with the best shopping experience
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {[
-              {
-                title: "Premium Quality",
-                description: "Handcrafted with the finest materials and attention to detail",
-                icon: "✨",
-                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop"
-              },
-              {
-                title: "Timeless Design",
-                description: "Classic black and white pieces that never go out of style",
-                icon: "🎨",
-                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop"
-              },
-              {
-                title: "Indian Heritage",
-                description: "Celebrating traditional craftsmanship with modern sensibilities",
-                icon: "🇮🇳",
-                image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=300&fit=crop"
-              }
-            ].map((feature, index) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+            {features.map((feature, index) => (
               <motion.div
-                key={feature.title}
-                whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 50 }}
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
                 animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-                className="text-center p-4 sm:p-6 md:p-8 card-premium hover-lift overflow-hidden"
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center group"
               >
-                <div className="relative mb-4">
-                  <img 
-                    src={feature.image} 
-                    alt={feature.title}
-                    className="w-full h-32 object-cover rounded-lg"
-                  />
-                  <div className="absolute inset-0 bg-black/20 rounded-lg"></div>
+                <div className={`w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 mx-auto mb-3 sm:mb-4 md:mb-6 rounded-full ${feature.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                  <feature.icon className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ${feature.color}`} />
                 </div>
-                <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4">{feature.icon}</div>
-                <h3 className="text-base sm:text-lg md:text-xl font-semibold text-brand-black mb-2 sm:mb-4">
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-brand-black mb-1 sm:mb-2 md:mb-3 lg:mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-xs sm:text-sm md:text-base text-brand-gray-600">
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-brand-gray-600">
                   {feature.description}
                 </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-brand-gray-50">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8 sm:mb-12 md:mb-16"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-3 sm:mb-6">
-              Explore Our Collections
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600 max-w-3xl mx-auto">
-              From traditional Indian wear to contemporary western styles, discover your perfect look.
-            </p>
-          </motion.div>
-
-                      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
-              {[
-                {
-                  key: 'mens-topwear',
-                  name: "Men's Topwear",
-                  description: "T-Shirts, Shirts, Jackets & More",
-                  image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop"
-                },
-                {
-                  key: 'mens-traditional',
-                  name: "Men's Traditional",
-                  description: "Kurtas, Sherwanis & Festive Wear",
-                  image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=600&fit=crop"
-                },
-                {
-                  key: 'mens-bottomwear',
-                  name: "Men's Bottomwear",
-                  description: "Jeans, Trousers & More",
-                  image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600&h=600&fit=crop"
-                },
-                {
-                  key: 'womens-topwear',
-                  name: "Women's Topwear",
-                  description: "Tops, Shirts, Jackets & More",
-                  image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600&h=600&fit=crop"
-                },
-                {
-                  key: 'womens-traditional',
-                  name: "Women's Traditional",
-                  description: "Sarees, Salwar Kameez & More",
-                  image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&h=600&fit=crop"
-                },
-                {
-                  key: 'womens-bottomwear',
-                  name: "Women's Bottomwear",
-                  description: "Jeans, Trousers & More",
-                  image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=600&fit=crop"
-                }
-              ].map((category, index) => (
-                <motion.div
-                  key={category.key}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                >
-                  <Link to={`/shop?category=${category.key}`}>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      className="relative overflow-hidden card-premium group aspect-square"
-                    >
-                      {/* Background Image */}
-                      <div className="absolute inset-0">
-                        <img
-                          src={category.image}
-                          alt={category.name}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-brand-black/40 to-brand-black/20"></div>
-                      </div>
-                      
-                      {/* Content */}
-                      <div className="relative z-10 flex flex-col justify-end h-full p-3 sm:p-4 md:p-6 text-brand-white">
-                        <div className="text-center">
-                          <h3 className="text-lg sm:text-xl md:text-2xl font-premium font-bold mb-1 sm:mb-2">
-                            {category.name}
-                          </h3>
-                          <p className="text-brand-gray-200 mb-2 sm:mb-4 text-xs sm:text-sm">
-                            {category.description}
-                          </p>
-                          <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileHover={{ opacity: 1, x: 0 }}
-                            className="flex items-center justify-center space-x-2 bg-brand-white/20 backdrop-blur-sm rounded-full px-4 py-2"
-                          >
-                            <span className="text-sm font-medium">Explore</span>
-                            <ArrowRight size={16} />
-                          </motion.div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </Link>
                 </motion.div>
               ))}
             </div>
@@ -393,135 +339,173 @@ const Home = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section ref={productsRef} className="py-12 sm:py-16 md:py-20 bg-brand-white">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <section ref={productsRef} className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-brand-gray-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={productsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="text-center mb-8 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-3 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-premium font-bold text-brand-black mb-3 sm:mb-4 md:mb-6">
               Featured Products
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-brand-gray-600 max-w-3xl mx-auto">
-              Discover our most popular pieces, crafted with premium materials and timeless design.
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-brand-gray-600 max-w-3xl mx-auto">
+              Discover our most popular black and white clothing items
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
             {featuredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={productsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group"
               >
-                <Link to={`/product/${product.id}`} className="block">
-                  <div className="card-premium overflow-hidden cursor-pointer group">
-                    {/* Product Image */}
-                    <div className="relative aspect-square overflow-hidden">
+                <div className="card-premium overflow-hidden">
+                  <div className="relative overflow-hidden aspect-square">
+                    <Link to={`/product/${product.id}`}>
                       <img
                         src={product.images[0]}
                         alt={product.name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
+                    </Link>
                       
                       {/* Overlay Actions */}
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-2 sm:space-x-3 md:space-x-4">
                         <motion.button
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleAddToCart(product);
-                          }}
-                          className="p-3 bg-brand-white text-brand-black rounded-full hover:bg-brand-gray-100 transition-colors duration-300"
-                        >
-                          <ShoppingBag size={20} />
+                        onClick={() => handleAddToCart(product)}
+                        className="p-2 sm:p-2 md:p-3 bg-brand-white text-brand-black rounded-full hover:bg-brand-gray-100 transition-colors duration-300"
+                        title="View Details"
+                      >
+                        <ShoppingBag size={16} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                         </motion.button>
                         
                         <motion.button
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
-                          onMouseEnter={() => setIsWishlistHovered(product.id)}
-                          onMouseLeave={() => setIsWishlistHovered(null)}
-                          className="p-3 bg-brand-white text-brand-black rounded-full hover:bg-brand-gray-100 transition-colors duration-300"
+                        className="p-2 sm:p-2 md:p-3 bg-brand-white text-brand-black rounded-full hover:bg-red-100 transition-colors duration-300"
+                        title="Add to Wishlist"
+                          onClick={(e) => handleWishlistToggle(product, e)}
                         >
-                          <Heart 
-                            size={20} 
-                            className={isWishlistHovered === product.id ? 'fill-red-500 text-red-500' : ''}
-                          />
+                        <Heart size={16} className={`sm:w-5 sm:h-5 md:w-6 md:h-6 ${isInWishlist(product.id) ? 'fill-red-500 text-red-500' : ''}`} />
                         </motion.button>
                       </div>
 
                       {/* Discount Badge */}
                       {product.originalPrice > product.price && (
-                        <div className="absolute top-4 left-4 bg-brand-black text-brand-white px-2 py-1 text-sm font-medium">
+                      <div className="absolute top-2 sm:top-3 md:top-4 left-2 sm:left-3 md:left-4 bg-brand-black text-brand-white px-1.5 sm:px-2 md:px-2 py-0.5 sm:py-1 md:py-1 text-xs sm:text-sm font-medium">
                           {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                         </div>
                       )}
                     </div>
 
-                    {/* Product Info */}
-                    <div className="p-3 sm:p-4 md:p-6">
-                      <h3 className="text-sm sm:text-base md:text-lg font-semibold text-brand-black mb-1 sm:mb-2">
+                  <div className="p-3 sm:p-4 md:p-6">
+                    <h3 className="text-sm sm:text-base md:text-lg font-semibold text-brand-black mb-2 line-clamp-2">
                         {product.name}
                       </h3>
                       
-                      <div className="flex items-center space-x-1 sm:space-x-2 mb-2 sm:mb-3">
+                    <div className="flex items-center space-x-2 mb-2">
                         <div className="flex items-center">
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
-                              size={12}
-                              className={`${i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'} sm:w-4 sm:h-4`}
+                            size={12}
+                            className={`${i < Math.floor(product.rating || 0) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'} sm:w-4 sm:h-4`}
                             />
                           ))}
                         </div>
-                        <span className="text-xs sm:text-sm text-brand-gray-500">
-                          ({product.reviews})
+                      <span className="text-xs sm:text-sm text-brand-gray-500">
+                        ({product.reviews || 0})
                         </span>
                       </div>
 
+                    <p className="text-xs sm:text-sm md:text-base text-brand-gray-600 mb-3 line-clamp-2">
+                      {product.description}
+                    </p>
+
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-1 sm:space-x-2">
-                          <span className="text-base sm:text-lg md:text-xl font-bold text-brand-black">
-                            ₹{product.price.toLocaleString()}
-                          </span>
-                          {product.originalPrice > product.price && (
-                            <span className="text-xs sm:text-sm text-brand-gray-500 line-through">
-                              ₹{product.originalPrice.toLocaleString()}
+                        <div className="flex items-center space-x-2">
+                        <span className="text-base sm:text-lg md:text-xl font-bold text-brand-black">
+                          ₹{product.price?.toLocaleString() || '0'}
+                        </span>
+                        {product.originalPrice > product.price && (
+                          <span className="text-xs sm:text-sm md:text-base text-brand-gray-500 line-through">
+                            ₹{product.originalPrice?.toLocaleString() || '0'}
                             </span>
                           )}
-                        </div>
                       </div>
+                      
+                      <button
+                        onClick={() => handleAddToCart(product)}
+                        className="btn-action text-xs sm:text-sm md:text-base px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5"
+                      >
+                        View Details
+                      </button>
                     </div>
                   </div>
-                </Link>
+                </div>
               </motion.div>
             ))}
           </div>
 
-          {/* View All Products Button */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={productsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-center mt-12"
+            className="text-center mt-12 sm:mt-16"
           >
             <Link to="/shop">
+            <div className="flex justify-center">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-secondary text-lg px-8 py-4"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-secondary text-lg sm:text-xl px-8 sm:px-10 py-4 sm:py-5"
               >
                 View All Products
-                <ArrowRight className="ml-2 inline" size={20} />
+                <ArrowRight className="ml-2" size={24} />
               </motion.button>
+              </div>
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-brand-black">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-premium font-bold text-brand-white mb-3 sm:mb-4 md:mb-6">
+              Stay Updated
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-brand-gray-300 mb-6 sm:mb-8 md:mb-10">
+              Subscribe to our newsletter for exclusive offers and latest updates
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-lg mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="flex-1 px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-white text-brand-black text-sm sm:text-base"
+              />
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 text-sm sm:text-base"
+              >
+                Subscribe
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </section>

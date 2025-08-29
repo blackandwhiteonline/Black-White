@@ -1,7 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { Heart, ShoppingBag, Trash2, X, Star } from 'lucide-react';
+import { Heart, ShoppingBag, Trash2, X, Star, Share2 } from 'lucide-react';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
@@ -10,26 +8,41 @@ import toast from 'react-hot-toast';
 const Wishlist = () => {
   const { wishlist, removeFromWishlist, clearWishlist, moveToCart } = useWishlist();
   const { addToCart } = useCart();
-  
-  // Intersection observer for animations
-  const [wishlistRef, wishlistInView] = useInView({ threshold: 0.1, triggerOnce: true });
 
   // Handle move to cart
   const handleMoveToCart = (product) => {
     moveToCart(product.id, addToCart);
-    toast.success(`${product.name} moved to cart!`);
+    // Toast is handled by WishlistContext
+  };
+
+  // Handle view details (same as shop/home pages)
+  const handleViewDetails = (product) => {
+    window.location.href = `/#/product/${product.id}`;
+    toast.success('Please check your measurements on the product page!', { duration: 3000, icon: '📏' });
   };
 
   // Handle remove from wishlist
   const handleRemoveFromWishlist = (product) => {
     removeFromWishlist(product.id);
-    toast.success(`${product.name} removed from wishlist`);
+    // Toast is handled by WishlistContext
   };
 
   // Handle clear wishlist
   const handleClearWishlist = () => {
     clearWishlist();
-    toast.success('Wishlist cleared!');
+    // Toast is handled by WishlistContext
+  };
+
+  const handleShareWishlist = async () => {
+    const url = window.location.href;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'My Wishlist', text: 'Check out my wishlist on Black & White', url });
+      } else {
+        await navigator.clipboard.writeText(url);
+        toast.success('Wishlist link copied to clipboard');
+      }
+    } catch (e) {}
   };
 
   return (
@@ -37,12 +50,7 @@ const Wishlist = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
+        <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl lg:text-5xl font-premium font-bold text-brand-black mb-4">
@@ -54,28 +62,30 @@ const Wishlist = () => {
             </div>
             
             {wishlist.length > 0 && (
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleClearWishlist}
-                className="btn-secondary flex items-center space-x-2"
-              >
-                <Trash2 size={20} />
-                <span>Clear All</span>
-              </motion.button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleShareWishlist}
+                  className="btn-secondary flex items-center space-x-2 hover:scale-105 transition-transform"
+                >
+                  <Share2 size={20} />
+                  <span>Share</span>
+                </button>
+                <button
+                  onClick={handleClearWishlist}
+                  className="btn-secondary flex items-center space-x-2 hover:scale-105 transition-transform"
+                >
+                  <Trash2 size={20} />
+                  <span>Clear All</span>
+                </button>
+              </div>
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Wishlist Items */}
-        <div ref={wishlistRef}>
+        <div>
           {wishlist.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={wishlistInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6 }}
-              className="text-center py-16"
-            >
+            <div className="text-center py-16">
               <div className="max-w-md mx-auto">
                 <div className="w-24 h-24 mx-auto mb-6 bg-brand-gray-200 rounded-full flex items-center justify-center">
                   <Heart size={40} className="text-brand-gray-400" />
@@ -90,162 +100,119 @@ const Wishlist = () => {
                   Start Shopping
                 </Link>
               </div>
-            </motion.div>
+            </div>
           ) : (
             <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              <AnimatePresence>
-                {wishlist.map((product, index) => (
-                  <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={wishlistInView ? { opacity: 1, y: 0 } : {}}
-                    exit={{ opacity: 0, y: -50 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="group"
-                  >
-                    <div className="card-premium overflow-hidden relative">
-                      
-                      {/* Product Image */}
-                      <Link to={`/product/${product.id}`} className="relative overflow-hidden aspect-square">
+              {wishlist.map((product, index) => (
+                <div
+                  key={product.id}
+                  className="group"
+                >
+                  <Link to={`/product/${product.id}`}>
+                    <div className="product-card bg-white border border-brand-gray-200 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col">
+                      <div className="relative overflow-hidden aspect-square">
                         <img
-                          src={product.images[0]}
+                          src={product.images?.[0] || 'https://via.placeholder.com/200x200?text=No+Image'}
                           alt={product.name}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
                         />
                         
-                        {/* Overlay Actions */}
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => handleMoveToCart(product)}
-                            className="p-3 bg-brand-white text-brand-black rounded-full hover:bg-brand-gray-100 transition-colors duration-300"
-                            title="Move to Cart"
+                        {/* Enhanced Overlay Actions */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center space-x-4">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleViewDetails(product);
+                            }}
+                            className="p-3 bg-white text-brand-black rounded-full hover:bg-brand-gray-100 transition-all duration-300 shadow-lg hover:scale-110"
+                            title="View Details"
                           >
                             <ShoppingBag size={20} />
-                          </motion.button>
+                          </button>
                           
-                          <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => handleRemoveFromWishlist(product)}
-                            className="p-3 bg-brand-white text-brand-black rounded-full hover:bg-red-100 transition-colors duration-300"
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              handleRemoveFromWishlist(product);
+                            }}
+                            className="p-3 bg-white text-brand-black rounded-full hover:bg-red-100 transition-all duration-300 shadow-lg hover:scale-110"
                             title="Remove from Wishlist"
                           >
                             <X size={20} />
-                          </motion.button>
+                          </button>
                         </div>
 
-                        {/* Discount Badge */}
+                        {/* Enhanced Discount Badge */}
                         {product.originalPrice > product.price && (
-                          <div className="absolute top-4 left-4 bg-brand-black text-brand-white px-2 py-1 text-sm font-medium">
+                          <div className="absolute top-3 left-3 bg-brand-black text-white px-2 py-1 text-xs font-bold rounded-lg">
                             {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                           </div>
                         )}
+                      </div>
 
-                        {/* Wishlist Badge */}
-                        <div className="absolute top-4 right-4 bg-red-500 text-brand-white p-2 rounded-full">
-                          <Heart size={16} className="fill-current" />
-                        </div>
-                      </Link>
-
-                      {/* Product Info */}
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm text-brand-gray-500 uppercase tracking-wide">
-                            {product.category.replace('-', ' ').replace('mens', 'Men\'s').replace('womens', 'Women\'s')}
-                          </span>
-                        </div>
+                      <div className="p-4 flex-1 flex flex-col"> 
+                        <h3 className="text-base font-semibold text-brand-black mb-2 line-clamp-2 hover:text-brand-gray-700 transition-colors">
+                          {product.name}
+                        </h3>
                         
-                        <Link to={`/product/${product.id}`}>
-                          <h3 className="text-lg font-semibold text-brand-black mb-2 line-clamp-2 hover:text-brand-gray-600 transition-colors duration-300 cursor-pointer">
-                            {product.name}
-                          </h3>
-                        </Link>
-                        
-                        <div className="flex items-center space-x-2 mb-3">
+                        <div className="flex items-center space-x-2 mb-2">
                           <div className="flex items-center">
                             {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
                                 size={14}
-                                className={i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                                className={`${i < Math.floor(product.rating || 0) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
                               />
                             ))}
                           </div>
                           <span className="text-sm text-brand-gray-500">
-                            ({product.reviews})
+                            ({product.reviews || 0})
                           </span>
                         </div>
 
-                        <p className="text-brand-gray-600 mb-4 line-clamp-2 text-sm">
+                        <p className="text-sm text-brand-gray-600 mb-3 line-clamp-2">
                           {product.description}
                         </p>
 
-                        <div className="flex items-center justify-between mb-4">
+                        <div className="mt-auto flex items-center justify-between">
                           <div className="flex items-center space-x-2">
-                            <span className="text-xl font-bold text-brand-black">
-                              ₹{product.price.toLocaleString()}
+                            <span className="text-lg font-bold text-brand-black">
+                              ₹{product.price?.toLocaleString() || '0'}
                             </span>
                             {product.originalPrice > product.price && (
                               <span className="text-sm text-brand-gray-500 line-through">
-                                ₹{product.originalPrice.toLocaleString()}
+                                ₹{product.originalPrice?.toLocaleString() || '0'}
                               </span>
                             )}
                           </div>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex space-x-2">
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => handleMoveToCart(product)}
-                            className="flex-1 btn-primary flex items-center justify-center space-x-2"
-                          >
-                            <ShoppingBag size={16} />
-                            <span>Move to Cart</span>
-                          </motion.button>
                           
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => handleRemoveFromWishlist(product)}
-                            className="p-3 text-red-500 hover:bg-red-50 rounded transition-colors duration-300"
-                            title="Remove from Wishlist"
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleViewDetails(product);
+                            }}
+                            className="bg-brand-black text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-brand-gray-800 transition-all duration-300 hover:scale-105"
                           >
-                            <Trash2 size={16} />
-                          </motion.button>
+                            View Details
+                          </button>
                         </div>
-
-                        {/* View Details Link */}
-                        <Link
-                          to={`/product/${product.id}`}
-                          className="block text-center text-brand-black hover:text-brand-gray-600 transition-colors duration-300 font-medium mt-3"
-                        >
-                          View Details
-                        </Link>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                  </Link>
+                </div>
+              ))}
             </div>
           )}
         </div>
 
         {/* Continue Shopping */}
         {wishlist.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-12 text-center"
-          >
+          <div className="mt-12 text-center">
             <Link to="/shop" className="btn-secondary">
               Continue Shopping
             </Link>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trash2, Minus, Plus, ArrowLeft, ShoppingBag } from 'lucide-react';
+import { Trash2, Minus, Plus, ArrowLeft, ShoppingBag, Truck, Shield, RefreshCw } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+ 
 
 const Cart = () => {
   // State management
   const [isUpdating, setIsUpdating] = useState(null);
+  const [pincode, setPincode] = useState('');
+  const [shippingInfo, setShippingInfo] = useState(null);
   
   // Context hooks
   const { 
@@ -19,6 +22,12 @@ const Cart = () => {
 
   // Handle quantity update
   const handleQuantityUpdate = async (cartId, newQuantity) => {
+    if (newQuantity < 1) {
+      // Remove product from cart if quantity is 0 or less
+      removeFromCart(cartId);
+      return;
+    }
+    
     setIsUpdating(cartId);
     try {
       await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
@@ -28,9 +37,58 @@ const Cart = () => {
     }
   };
 
-  // Calculate subtotal
+  // Calculate shipping based on pincode
+  const calculateShipping = (pincode) => {
+    if (!pincode || pincode.length !== 6) return null;
+    
+    const delhiPincode = 110001;
+    const distance = Math.abs(parseInt(pincode) - delhiPincode);
+    let deliveryDays = 3;
+    let shippingCharge = 0;
+
+    if (distance < 1000) {
+      deliveryDays = 2;
+      shippingCharge = 50;
+    } else if (distance < 2000) {
+      deliveryDays = 3;
+      shippingCharge = 100;
+    } else if (distance < 3000) {
+      deliveryDays = 4;
+      shippingCharge = 150;
+    } else {
+      deliveryDays = 5;
+      shippingCharge = 200;
+    }
+
+    const deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate() + deliveryDays);
+
+    return {
+      pincode,
+      deliveryDays,
+      deliveryDate: deliveryDate.toLocaleDateString('en-IN'),
+      shippingCharge
+    };
+  };
+
+  // Handle pincode change
+  const handlePincodeChange = (e) => {
+    const pincode = e.target.value.replace(/\D/g, '').slice(0, 6);
+    setPincode(pincode);
+    
+    if (pincode.length === 6) {
+      const shipping = calculateShipping(pincode);
+      setShippingInfo(shipping);
+    } else {
+      setShippingInfo(null);
+    }
+  };
+
+  // Calculate totals
   const subtotal = getCartTotal();
-  const total = subtotal;
+  const shipping = shippingInfo ? 
+    (shippingInfo.shippingCharge) : 0;
+  const total = subtotal + shipping;
 
   return (
     <div className="min-h-screen bg-brand-gray-50 pt-12 sm:pt-16 md:pt-20">
@@ -52,10 +110,11 @@ const Cart = () => {
                 {cartItems.length} item{cartItems.length !== 1 ? 's' : ''} in your cart
               </p>
             </div>
-            <Link to="/shop">
+            {/* move continue shopping to summary section on mobile; keep here hidden on small screens */}
+            <Link to="/shop" className="hidden lg:block">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="btn-secondary text-sm sm:text-base"
               >
                 <ArrowLeft className="mr-2" size={18} />
@@ -83,6 +142,7 @@ const Cart = () => {
               </p>
             </div>
             <Link to="/shop">
+            <div className="flex justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -90,6 +150,7 @@ const Cart = () => {
               >
                 Start Shopping
               </motion.button>
+              </div>
             </Link>
           </motion.div>
         ) : (
@@ -197,6 +258,44 @@ const Cart = () => {
                   </AnimatePresence>
                 </div>
               </motion.div>
+
+              {/* Shipping Estimate */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="card-premium p-6 mt-6"
+              >
+                <h3 className="text-lg font-semibold text-brand-black mb-4 flex items-center">
+                  <Truck className="mr-2" size={20} />
+                  Shipping Estimate
+                </h3>
+                
+                <div className="flex space-x-3">
+                  <input
+                    type="text"
+                    placeholder="Enter pincode for shipping estimate"
+                    value={pincode}
+                    onChange={handlePincodeChange}
+                    className="flex-1 px-4 py-3 border border-brand-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-black focus:border-transparent"
+                  />
+                </div>
+                
+                {shippingInfo && (
+                  <div className="mt-4 bg-brand-gray-50 p-4 rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-brand-gray-600">Expected Delivery:</span>
+                      <span className="font-medium text-green-600">{shippingInfo.deliveryDate}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-brand-gray-600">Shipping Charge:</span>
+                      <span className="font-medium">
+                        {shippingInfo.shippingCharge === 0 ? 'Free' : `₹${shippingInfo.shippingCharge}`}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
             </div>
 
             {/* Order Summary */}
@@ -217,6 +316,19 @@ const Cart = () => {
                     <span className="text-brand-gray-600">Subtotal</span>
                     <span className="font-medium">₹{subtotal.toLocaleString()}</span>
                   </div>
+                  
+                  <div className="flex justify-between">
+                    <span className="text-brand-gray-600">Shipping</span>
+                    <span className="font-medium">
+                      {shipping === 0 ? 'Free' : `₹${shipping}`}
+                    </span>
+                  </div>
+                  
+                  {shipping > 0 && (
+                    <div className="text-sm text-brand-gray-500">
+                      Free shipping on orders above ₹5,000
+                    </div>
+                  )}
                   
                   <div className="border-t border-brand-gray-200 pt-4">
                     <div className="flex justify-between">
@@ -239,18 +351,30 @@ const Cart = () => {
                   </motion.button>
                 </Link>
 
+                {/* Continue Shopping (mobile placement) */}
+                <Link to="/shop" className="block lg:hidden mt-3">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full btn-secondary py-3"
+                  >
+                    <ArrowLeft className="mr-2" size={16} />
+                    Continue Shopping
+                  </motion.button>
+                </Link>
+
                 {/* Additional Info */}
                 <div className="mt-6 text-sm text-brand-gray-600 space-y-2">
                   <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <Shield size={16} className="text-green-500" />
                     <span>Secure checkout</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <Truck size={16} className="text-green-500" />
                     <span>Free returns</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <RefreshCw size={16} className="text-green-500" />
                     <span>Fast delivery</span>
                   </div>
                 </div>

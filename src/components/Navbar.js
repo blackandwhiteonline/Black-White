@@ -83,14 +83,14 @@ const Navbar = () => {
 
             {/* Logo - Centered on Mobile, Left on Desktop */}
             <div className="flex-1 lg:flex-none flex justify-center lg:justify-start">
-              <Link to="/" className="flex items-center space-x-2">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
+            <Link to="/" className="flex items-center space-x-2">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                   className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-premium font-bold text-brand-black"
-                >
-                  Black&White
-                </motion.div>
-              </Link>
+              >
+                Black&White
+              </motion.div>
+            </Link>
             </div>
 
             {/* Desktop Navigation */}
@@ -108,7 +108,7 @@ const Navbar = () => {
               ))}
             </div>
 
-                          {/* Desktop Actions */}
+            {/* Desktop Actions */}
             <div className="hidden lg:flex items-center space-x-6">
               
               {/* Search Button */}
