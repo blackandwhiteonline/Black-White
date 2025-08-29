@@ -292,10 +292,10 @@ const Account = () => {
                     key={tab.id}
                     onClick={() => handleTabChange(tab.id)}
               className={`w-full sm:w-auto text-left flex items-center space-x-2 px-5 py-3 rounded-lg transition-all duration-300 text-base font-medium ${
-                activeTab === tab.id
+                      activeTab === tab.id
                   ? 'bg-brand-black text-white shadow-lg'
                   : 'bg-white text-brand-gray-700 hover:bg-brand-gray-100 hover:shadow-md'
-              }`}
+                    }`}
                   >
                     <tab.icon size={20} />
                     <span>{tab.label}</span>
@@ -455,9 +455,9 @@ const Account = () => {
                   <option value="Delivered">Delivered</option>
                   <option value="Cancelled">Cancelled</option>
                 </select>
-              </div>
-            </div>
-
+                        </div>
+                      </div>
+                      
             {/* Orders List */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h2 className="text-xl font-semibold text-brand-black mb-6">Order History</h2>
@@ -471,7 +471,7 @@ const Account = () => {
                         <span className={`inline-flex items-center mt-2 px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
                           {getStatusIcon(order.status)}<span className="ml-1">{order.status}</span>
                         </span>
-                      </div>
+                        </div>
                       <div className="text-right">
                         <p className="text-lg font-bold text-brand-black">₹{order.total?.toLocaleString() || '0'}</p>
                       </div>
